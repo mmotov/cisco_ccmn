@@ -15,6 +15,9 @@ class Header extends Component {
   };
 
   render() {
+    if (window.location.pathname === "/login"){
+      return (<div></div>);
+    }
     return (
       <AppBar position="static">
         <Tabs value={this.state.value} onChange={this.handleChange}

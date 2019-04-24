@@ -1,0 +1,17 @@
+.Main {
+  width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 40%;
+}
+
+.Paper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+}
+
+.InerBox{
+  margin: 15px;
+}
