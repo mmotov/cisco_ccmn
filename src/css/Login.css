@@ -1,0 +1,24 @@
+.LoginWrapper {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.Main {
+  width: 400px;
+  margin: 0 auto;
+}
+
+.Paper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+}
+
+.InerBox{
+  margin: 15px;
+}
