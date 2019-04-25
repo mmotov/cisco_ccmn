@@ -8,6 +8,7 @@ class Header extends Component {
   constructor(props) {
     super(props);
     this.state = { value: 0, };
+    console.log("lol")
   }
 
   handleChange = (event, value) => {
@@ -15,18 +16,24 @@ class Header extends Component {
   };
 
   render() {
-    if (window.location.pathname === "/login"){
+    // <main>
+      // {this.props.children}
+    // </main>
+    console.log('headerProps: ', this.props);
+    if (this.props.location.pathname == "/login"){
       return (<div></div>);
     }
     return (
-      <AppBar position="static">
-        <Tabs value={this.state.value} onChange={this.handleChange}
-          centered >
-          <Tab label="Home" component={Link} to="/" />
-          <Tab label="Analytics" component={Link} to="/analytics" />
-          <Tab label="Location" />
-        </Tabs>
-      </AppBar>
+      <div>
+        <AppBar position="static">
+          <Tabs value={this.state.value} onChange={this.handleChange}
+            centered >
+            <Tab label="Home" component={Link} to="/" />
+            <Tab label="Analytics" component={Link} to="/analytics" />
+            <Tab label="Location" />
+          </Tabs>
+        </AppBar>
+    </div>
     );
   }
 }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom'
+import { Route, Redirect, BrowserRouter} from 'react-router-dom';
+import {browserHistory} from 'react-router'
 import './App.css';
 import Home from './Home/Home.jsx';
 import Analytics from './Analytics/Analytics.jsx';
@@ -10,6 +11,7 @@ let Auth = (Component) => {
   if (!localStorage.getItem('cisco_auth')){
     return () => ( <Redirect to='/login' /> );
   }
+  console.log(Component)
   return () => ( <Component /> );
   // localStorage.setItem('cisco_auth', JSON.stringify({
   //   password: btoa("123"),
@@ -31,14 +33,14 @@ class App extends Component {
 
   render() {
     return (
-      <main>
-        <Header />
-        <Switch>
-          <Route exact path='/' component={Auth(Home)} />
-          <Route path='/analytics' component={Auth(Analytics)}/>
-          <Route path='/login' component={Login}/>
-        </ Switch>
-      </main>
+      <div>
+      <BrowserRouter>
+            <Route path={"/"} component={Header} />
+            <Route exact path={"/"} component={Auth(Home)} />
+            <Route path={"/analytics"} component={Auth(Analytics)} />
+            <Route path={"/login"} component={Login} />
+      </BrowserRouter>
+      </div>
     );
   }
 }

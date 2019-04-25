@@ -34,7 +34,7 @@ class Login extends Component {
   }
 
   handleSubmit() {
-    console.log("click")
+    localStorage.setItem('cisco_auth', JSON.stringify(this.state));
   }
 
   render() {
@@ -42,6 +42,7 @@ class Login extends Component {
       return (<Redirect to='/' />);
     }
     return (
+      <div className="LoginWrapper">
       <div className="Main">
       <CssBaseline />
       <Paper className="Paper">
@@ -80,12 +81,13 @@ class Login extends Component {
           variant="contained"
           color="primary"
           className="Submit"
-          onClick={this.handleSubmit.bind()}
+          onClick={this.handleSubmit.bind(this)}
           >
           Submit
         </Button>
       </Paper>
     </div>
+  </div>
     );
   }
 }
