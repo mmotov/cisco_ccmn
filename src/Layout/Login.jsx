@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-import { getSiteId } from '../requests/presence/visitors';
 import axios from 'axios/index';
 import config from '../config.js'
 
@@ -38,23 +37,33 @@ class Login extends Component {
     }
   }
 
-  handleSubmit() {
+  async componentWillUnmount() {
+    try{
+      let url = config.presence + 'api/config/v1/sites';
+      let header = (JSON.parse(localStorage.getItem('cisco_auth'))).presense
+      let res = await axios.get(config.presence + 'api/config/v1/sites', {
+              headers: {
+                  Authorization: header
+              }
+          });
+      localStorage.setItem('siteId', JSON.stringify({
+        id: res.data[0].aesUId,
+      }));
+        console.log("pop1")
+    } catch (error){
+      if (error.response.status == 401){
+        localStorage.removeItem('cisco_auth');
+        this.props.history.push("/login");
+      }
+    }
+  }
+
+ handleSubmit() {
     localStorage.setItem('cisco_auth', JSON.stringify({
       presense: "Base " + btoa(this.state.presenceUname + ":" + this.state.presencePass),
       location: "Base " + btoa(this.state.locationUname + ":" + this.state.locationPass),
     }));
-  }
-
-  async componentWillUnmount() {
-    try{
-      let tmp = await axios.get(config.presence + 'api/config/v1/sites', {
-              headers: {
-                  Authorization: (JSON.parse(localStorage.getItem('cisco_auth'))).presense
-              }
-          });
-    } catch (error){
-      console.log("ERROR",  error.response.status)
-    }
+    this.omponentWillUnmount();
   }
 
   render() {
@@ -75,11 +84,11 @@ class Login extends Component {
                   <FormLabel component="legend">Cisco_CMX_Locate</FormLabel>
                 <FormControl margin="normal" required fullWidth>
                   <InputLabel htmlFor="text">Username</InputLabel>
-                  <Input required={true} name="presenceUname" autoComplete="text" autoFocus onChange={this.handleChange.bind(this)} />
+                  <Input required={true} name="locationUname" autoComplete="text" autoFocus onChange={this.handleChange.bind(this)} />
                 </FormControl>
                 <FormControl margin="normal" required fullWidth>
                   <InputLabel htmlFor="password">Password</InputLabel>
-                  <Input required={true} name="presencePass" type="password"  autoComplete="current-password" onChange={this.handleChange.bind(this)} />
+                  <Input required={true} name="locationPass" type="password"  autoComplete="current-password" onChange={this.handleChange.bind(this)} />
                 </FormControl>
 
             </div>
@@ -88,11 +97,11 @@ class Login extends Component {
 
               <FormControl margin="normal" required fullWidth>
                 <InputLabel htmlFor="text">Username</InputLabel>
-                <Input required={true} name="locationUname" autoComplete="text" autoFocus onChange={this.handleChange.bind(this)} />
+                <Input required={true} name="presenceUname" autoComplete="text" autoFocus onChange={this.handleChange.bind(this)} />
               </FormControl>
               <FormControl margin="normal" required fullWidth>
                 <InputLabel htmlFor="password">Password</InputLabel>
-                <Input required={true} name="locationPass" type="password" autoComplete="current-password" onChange={this.handleChange.bind(this)} />
+                <Input required={true} name="presencePass" type="password" autoComplete="current-password" onChange={this.handleChange.bind(this)} />
               </FormControl>
               </div>
               <Button
