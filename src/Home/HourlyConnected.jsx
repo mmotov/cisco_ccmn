@@ -11,25 +11,25 @@ class HourlyConnected extends Component {
     }
 
     componentDidMount() {
-        visitorsHourlyToday()
-            .then((result) => {
-                this.setState({data: result});
-                console.log(result);
-            });
+        // visitorsHourlyToday()
+        //     .then((result) => {
+        //         this.setState({data: result});
+        //         console.log(result);
+        //     });
     }
 
     buildDataForChart() {
-        
+
     }
 
     render() {
-
+      // HELLO WORLD
+      // <LineChart width={400} height={400} data={this.state.data}>
+      //     <Line type="monotone" dataKey="uv" stroke="#8884d8" />
+      // </LineChart>
         return (
             <div>
-                HELLO WORLD
-                <LineChart width={400} height={400} data={this.state.data}>
-                    <Line type="monotone" dataKey="uv" stroke="#8884d8" />
-                </LineChart>
+
             </div>
         );
     }
