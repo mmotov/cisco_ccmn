@@ -4,9 +4,7 @@ import HourlyConnected  from './HourlyConnected';
 class Home extends Component {
   render() {
     return (
-      <div>
-      <HourlyConnected/>
-      </div>
+          <HourlyConnected/>
     );
   }
 }

@@ -28,7 +28,6 @@ class Header extends Component {
       <AppBar position="static">
         <Tabs value={this.state.value} onChange={this.handleChange}
           centered >
-          <Tab label="Home" component={Link} to="/" />
           <Tab label="Analytics" component={Link} to="/analytics" />
           <Tab label="Location" component={Link} to="/location" />
           <Tab label="Log Out" onClick={this.logout.bind(this)} />

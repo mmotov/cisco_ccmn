@@ -38,6 +38,7 @@ class HourlyConnected extends Component {
             chartData.push(object);
             lastProp++;
         }
+        console.log(chartData);
         return chartData;
     }
 
@@ -49,7 +50,7 @@ class HourlyConnected extends Component {
                     <AreaChart data={chartData}>
                         <Area type="monotone" dataKey="connected" stroke="#8884d8" />
                         <CartesianGrid stroke="#ccc"/>
-                        <XAxis dataKey="hour"/>
+                        <XAxis dataKey="hour" height={60}/>
                         <YAxis />
                         <Tooltip />
                     </AreaChart>
