@@ -49,7 +49,6 @@ class Login extends Component {
       localStorage.setItem('siteId', JSON.stringify({
         id: res.data[0].aesUId,
       }));
-        console.log("pop1")
     } catch (error){
       if (error.response.status == 401){
         localStorage.removeItem('cisco_auth');
@@ -63,7 +62,6 @@ class Login extends Component {
       presense: "Base " + btoa(this.state.presenceUname + ":" + this.state.presencePass),
       location: "Base " + btoa(this.state.locationUname + ":" + this.state.locationPass),
     }));
-    this.omponentWillUnmount();
   }
 
   render() {
