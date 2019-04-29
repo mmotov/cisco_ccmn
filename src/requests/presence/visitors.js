@@ -53,15 +53,14 @@ export function visitorsToday() {
     });
 }
 
-export function visitorsHourlyToday() {
-    let url = baseUrl + 'api/presence/v1/connected/hourly/today';
+export function visitorsHourly(params) {
+    let url = baseUrl + 'api/presence/v1/connected/hourly';
+    params.siteId = siteId;
     let headers = {
         headers: {
             Authorization: header
         },
-        params: {
-            siteId: siteId
-        }
+        params: params
     };
 
     return new Promise((resolve, reject) => {

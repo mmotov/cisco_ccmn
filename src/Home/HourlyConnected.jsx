@@ -1,21 +1,41 @@
 import React, { Component } from 'react';
-import { visitorsHourlyToday } from '../requests/presence/visitors';
+import { visitorsHourly } from '../requests/presence/visitors';
 import { AreaChart, Area, CartesianGrid, XAxis, YAxis, ResponsiveContainer, Tooltip } from 'recharts';
 
 class HourlyConnected extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { data: {}, };
+        this.state = {
+            date: this.props.queryParams.date,
+            data: []
+        };
         this.getChartData = this.getChartData.bind(this);
     }
 
     componentDidMount() {
-        visitorsHourlyToday()
+        // let query = {
+        //     date: this.state.date
+        // };
+        // visitorsHourly(query)
+        //     .then((result) => {
+        //         this.setState({data: result});
+        //         console.log(result);
+        //     });
+    }
+
+    componentWillReceiveProps(nextProps) {
+
+        this.setState({date: nextProps.queryParams.date});
+        let query =  {
+            date: nextProps.queryParams.date
+        };
+        visitorsHourly(query)
             .then((result) => {
                 this.setState({data: result});
                 console.log(result);
             });
+
     }
 
 
@@ -38,7 +58,7 @@ class HourlyConnected extends Component {
             chartData.push(object);
             lastProp++;
         }
-        console.log(chartData);
+        console.log('Chart: ', chartData);
         return chartData;
     }
 

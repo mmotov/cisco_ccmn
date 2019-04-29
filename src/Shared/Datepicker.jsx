@@ -9,89 +9,75 @@ import FormControl from "@material-ui/core/FormControl";
 
 
 const styles = theme => ({
-    formControl: {
-        margin: theme.spacing.unit,
-        // minWidth: 120,
-        width: "100%"
-    },
+	formControl: {
+		margin: theme.spacing.unit,
+		width: "100%"
+	},
 });
 
 
 class Datepicker extends Component {
 
-    constructor(props){
-        super(props);
-        let now = new Date();
-        let start = moment(new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0,0,0,0));
-        let end = moment(start).add(1, "days").subtract(1, "seconds");
-        let startStr = now.getFullYear() + '-' + now.getMonth() + '-' + now.getDate();
-        let date = new Date();
-        date.setTime(end);
-        let endStr = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate();
+	constructor(props) {
+		super(props);
+		let now = new Date();
+		let start = moment(new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0,0,0,0));
+		let end = moment(start).add(1, "days").subtract(1, "seconds");
+		this.state = {
+			startDate : start,
+			endDate : end,
+		};
 
-        this.state = {
-            start : start,
-            end : end,
+		let date = {
+			start: moment(this.state.startDate).format('Y-MM-DD'),
+			end: moment(this.state.endDate).format('Y-MM-DD')
+		};
+		this.props.changeDate(date);
+		this.applyCallback = this.applyCallback.bind(this);
+	}
 
-            startStr : startStr,
-            endStr : endStr
-        };
+	applyCallback(startDate, endDate){
+		this.setState({
+			startDate: startDate,
+			endDate : endDate,
+		});
+		let date = {
+			start: moment(startDate).format('Y-MM-DD'),
+			end: moment(endDate).format('Y-MM-DD')
+		};
+		this.props.changeDate(date);
+	}
 
-        this.applyCallback = this.applyCallback.bind(this);
-    }
+	render(){
+		const { classes } = this.props;
 
-    applyCallback(startDate, endDate){
-
-        let sDate = new Date();
-        sDate.setTime(startDate);
-        let startStr = sDate.getFullYear() + '-' + sDate.getMonth() + '-' + sDate.getDate();
-
-        let eDate = new Date();
-        eDate.setTime(endDate);
-        let endStr = eDate.getFullYear() + '-' + eDate.getMonth() + '-' + eDate.getDate();
-
-        this.setState({
-                start: startDate,
-                end : endDate,
-                startStr: startStr,
-                endStr: endStr
-            }
-        )
-    }
-
-    render(){
-        const { classes } = this.props;
-
-        let now = new Date();
-        let start = moment(new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0,0,0,0));
-        let end = moment(start).add(1, "days").subtract(1, "seconds");
-        let ranges = {
-            "Today Only": [moment(start), moment(end)],
-            "Yesterday Only": [moment(start).subtract(1, "days"), moment(end).subtract(1, "days")],
-            "3 Days": [moment(start).subtract(3, "days"), moment(end)]
-        };
-        let local = {
-            "format":"DD-MM-YYYY",
-
-        };
-        let maxDate = moment(start).add(24, "hour")
-        return(
-            <DateTimeRangeContainer
-                ranges={ranges}
-                start={this.state.start}
-                end={this.state.end}
-                local={local}
-                maxDate={maxDate}
-                applyCallback={this.applyCallback}
-            >
-                <FormControl className={classes.formControl}>
-                    <TextField
-                        value={this.state.startStr + ' - ' + this.state.endStr}
-                    />
-                </FormControl>
-            </DateTimeRangeContainer>
-        );
-    }
+		let now = new Date();
+		let start = moment(new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0,0,0,0));
+		let end = moment(start).add(1, "days").subtract(1, "seconds");
+		let ranges = {
+			"Today Only": [moment(start), moment(end)],
+			"Yesterday Only": [moment(start).subtract(1, "days"), moment(end).subtract(1, "days")],
+			"3 Days": [moment(start).subtract(3, "days"), moment(end)]
+		};
+		let local = { "format":"DD-MM-YYYY" };
+		let maxDate = moment(start).add(24, "hour")
+		return(
+			<DateTimeRangeContainer
+				ranges={ranges}
+				start={this.state.startDate}
+				end={this.state.endDate}
+				local={local}
+				maxDate={maxDate}
+				applyCallback={this.applyCallback}
+			>
+				<FormControl className={classes.formControl}>
+					<TextField
+						value={moment(this.state.startDate).format('Y, MMMM D') + ' - ' + moment(this.state.endDate).format('Y, MMMM D')}
+					/>
+				</FormControl>
+			</DateTimeRangeContainer>
+		);
+	}
 }
 
 export default withStyles(styles)(Datepicker);
