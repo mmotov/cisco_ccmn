@@ -57,9 +57,7 @@ export function visitorsHourly(params) {
     let url = baseUrl + 'api/presence/v1/connected/hourly';
     params.siteId = siteId;
     let headers = {
-        headers: {
-            Authorization: header
-        },
+        headers: { Authorization: header},
         params: params
     };
 

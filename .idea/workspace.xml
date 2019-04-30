@@ -3,10 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="f276d6fb-3055-403b-9e0b-22abed1d9039" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Analytics/Analytics.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Analytics/Analytics.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Analytics/Header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Analytics/Header.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Home/HourlyConnected.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Home/HourlyConnected.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Shared/Datepicker.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Shared/Datepicker.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/requests/presence/visitors.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/requests/presence/visitors.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -33,8 +32,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Home/HourlyConnected.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="29" column="15" lean-forward="true" selection-start-line="29" selection-start-column="15" selection-end-line="29" selection-end-column="15" />
+            <state relative-caret-position="525">
+              <caret line="36" column="42" selection-start-line="36" selection-start-column="42" selection-end-line="36" selection-end-column="42" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -45,11 +44,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Analytics/Header.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="780">
-              <caret line="53" column="10" selection-start-line="53" selection-start-column="10" selection-end-line="53" selection-end-column="10" />
-              <folding>
-                <element signature="e#0#41#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="120">
+              <caret line="9" column="30" lean-forward="true" selection-start-line="9" selection-start-column="30" selection-end-line="9" selection-end-column="30" />
             </state>
           </provider>
         </entry>
@@ -58,7 +54,7 @@
         <entry file="file://$PROJECT_DIR$/src/Shared/Datepicker.jsx">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="765">
-              <caret line="51" column="39" lean-forward="true" selection-start-line="51" selection-start-column="39" selection-end-line="51" selection-end-column="39" />
+              <caret line="51" column="39" selection-start-line="51" selection-start-column="39" selection-end-line="51" selection-end-column="39" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
                 <element signature="e#215#243#0" expanded="true" />
@@ -70,8 +66,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/App.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="543">
-              <caret line="151" column="18" selection-start-line="151" selection-start-column="18" selection-end-line="151" selection-end-column="18" />
+            <state relative-caret-position="990">
+              <caret line="66" column="14" selection-start-line="66" selection-start-column="14" selection-end-line="66" selection-end-column="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/css/Datepicker.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1293">
+              <caret line="130" column="1" selection-start-line="130" selection-start-column="1" selection-end-line="130" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -79,8 +84,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/requests/presence/visitors.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="810">
-              <caret line="55" column="40" selection-start-line="55" selection-start-column="40" selection-end-line="55" selection-end-column="40" />
+            <state relative-caret-position="840">
+              <caret line="56" column="57" lean-forward="true" selection-start-line="56" selection-start-column="25" selection-end-line="56" selection-end-column="57" />
+              <folding>
+                <element signature="e#0#32#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/requests/credentials.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="75">
+              <caret line="5" column="68" selection-start-line="5" selection-start-column="68" selection-end-line="5" selection-end-column="68" />
             </state>
           </provider>
         </entry>
@@ -105,10 +122,12 @@
       <find>_utils</find>
       <find>utils</find>
       <find>activeNotifier</find>
+      <find>data</find>
     </findStrings>
     <replaceStrings>
       <replace>connected</replace>
       <replace />
+      <replace>visitors</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -126,11 +145,13 @@
         <option value="$PROJECT_DIR$/src/Layout/Header.jsx" />
         <option value="$PROJECT_DIR$/src/Home/Home.jsx" />
         <option value="$PROJECT_DIR$/node_modules/rb-datepicker/dist/utils/index.js" />
-        <option value="$PROJECT_DIR$/src/App.css" />
         <option value="$PROJECT_DIR$/src/Shared/Datepicker.jsx" />
-        <option value="$PROJECT_DIR$/src/Analytics/Header.jsx" />
-        <option value="$PROJECT_DIR$/src/requests/presence/visitors.js" />
         <option value="$PROJECT_DIR$/src/Analytics/Analytics.jsx" />
+        <option value="$PROJECT_DIR$/src/css/Datepicker.css" />
+        <option value="$PROJECT_DIR$/src/Analytics/Header.jsx" />
+        <option value="$PROJECT_DIR$/src/App.css" />
+        <option value="$PROJECT_DIR$/src/requests/presence/visitors.js" />
+        <option value="$PROJECT_DIR$/src/requests/credentials.js" />
         <option value="$PROJECT_DIR$/src/Home/HourlyConnected.jsx" />
       </list>
     </option>
@@ -174,14 +195,19 @@
               <item name="ccmn" type="b2602c69:ProjectViewProjectNode" />
               <item name="ccmn" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="requests" type="462c0819:PsiDirectoryNode" />
+              <item name="Analytics" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ccmn" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ccmn" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ccmn" type="b2602c69:ProjectViewProjectNode" />
               <item name="ccmn" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="requests" type="462c0819:PsiDirectoryNode" />
-              <item name="presence" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -265,18 +291,19 @@
       <workItem from="1555998979283" duration="3185000" />
       <workItem from="1556083455406" duration="4995000" />
       <workItem from="1556428674136" duration="21555000" />
-      <workItem from="1556511312927" duration="7715000" />
+      <workItem from="1556511312927" duration="7984000" />
+      <workItem from="1556597570282" duration="2660000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="41162000" />
+    <option name="totallyTimeSpent" value="44091000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="2560" height="1440" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25774425" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25972995" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -458,24 +485,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/requests/presence/visitors.js">
+    <entry file="file://$PROJECT_DIR$/src/App.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="810">
-          <caret line="55" column="40" selection-start-line="55" selection-start-column="40" selection-end-line="55" selection-end-column="40" />
+        <state relative-caret-position="990">
+          <caret line="66" column="14" selection-start-line="66" selection-start-column="14" selection-end-line="66" selection-end-column="14" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/App.css">
+    <entry file="file://$PROJECT_DIR$/src/css/Datepicker.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="543">
-          <caret line="151" column="18" selection-start-line="151" selection-start-column="18" selection-end-line="151" selection-end-column="18" />
+        <state relative-caret-position="1293">
+          <caret line="130" column="1" selection-start-line="130" selection-start-column="1" selection-end-line="130" selection-end-column="1" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Shared/Datepicker.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="765">
-          <caret line="51" column="39" lean-forward="true" selection-start-line="51" selection-start-column="39" selection-end-line="51" selection-end-column="39" />
+          <caret line="51" column="39" selection-start-line="51" selection-start-column="39" selection-end-line="51" selection-end-column="39" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
             <element signature="e#215#243#0" expanded="true" />
@@ -485,11 +512,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Analytics/Header.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="780">
-          <caret line="53" column="10" selection-start-line="53" selection-start-column="10" selection-end-line="53" selection-end-column="10" />
+        <state relative-caret-position="120">
+          <caret line="9" column="30" lean-forward="true" selection-start-line="9" selection-start-column="30" selection-end-line="9" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/requests/presence/visitors.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="840">
+          <caret line="56" column="57" lean-forward="true" selection-start-line="56" selection-start-column="25" selection-end-line="56" selection-end-column="57" />
           <folding>
-            <element signature="e#0#41#0" expanded="true" />
+            <element signature="e#0#32#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/requests/credentials.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="68" selection-start-line="5" selection-start-column="68" selection-end-line="5" selection-end-column="68" />
         </state>
       </provider>
     </entry>
@@ -506,8 +547,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Home/HourlyConnected.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="29" column="15" lean-forward="true" selection-start-line="29" selection-start-column="15" selection-end-line="29" selection-end-column="15" />
+        <state relative-caret-position="525">
+          <caret line="36" column="42" selection-start-line="36" selection-start-column="42" selection-end-line="36" selection-end-column="42" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
