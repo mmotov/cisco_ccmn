@@ -39,7 +39,7 @@ class Analytics extends Component {
 
 		let params = this.buildQueryParams();
 		return (
-			<div className={"wrapper-sm-24"}>
+			<div className={"wrapper-md-24"}>
 				<Grid container direction={"column"}>
 					<Grid item xs={12} className={"wrapper-24"}>
 						<Header handleParams={this.getQueryParams}/>
