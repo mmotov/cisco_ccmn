@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Redirect, BrowserRouter} from 'react-router-dom';
 import './App.css';
-import Home from './Home/Home.jsx';
 import Analytics from './Analytics/Analytics.jsx';
 import Header from './Layout/Header.jsx';
 import Login from './Layout/Login.jsx';

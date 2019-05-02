@@ -1,15 +1,24 @@
 import React, {Component} from 'react';
 import Grid from '@material-ui/core/Grid';
-// import * as axios  from 'axios';
-import HourlyConnected from "../Home/HourlyConnected";
-import Header from "./Header";
 import moment from "moment";
+
+import Header from "./Header";
+import Day from "./Connected/Day";
+import Range from "./Connected/Range";
+
+
+function Connected(props) {
+	if (typeof(props.date.date) !== 'undefined') {
+		return (<Day date={props.date.date} />);
+	} else if (typeof(props.date.startDate) !== 'undefined' && typeof(props.date.endDate) !== 'undefined') {
+		return (<Range startDate={props.date.startDate} endDate={props.date.endDate}/>);
+	}
+}
 
 class Analytics extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			// floor: 0,
 			startDate: moment(new Date()).format('Y-MM-DD'),
 			endDate: moment(new Date()).format('Y-MM-DD'),
 		};
@@ -36,7 +45,6 @@ class Analytics extends Component {
 	};
 
 	render() {
-
 		let params = this.buildQueryParams();
 		return (
 			<div className={"wrapper-md-24"}>
@@ -45,7 +53,7 @@ class Analytics extends Component {
 						<Header handleParams={this.getQueryParams}/>
 					</Grid>
 					<Grid item xs={12}>
-						<HourlyConnected queryParams={params}/>
+						<Connected date={params} />
 					</Grid>
 				</Grid>
 			</div>
