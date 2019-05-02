@@ -23,11 +23,10 @@ class Map extends Component {
       let header = (JSON.parse(localStorage.getItem('cisco_auth'))).location
       let res = await axios.get(url, {
               headers: {
-                  Authorization: header
+                  Authorization: header,
               }
           });
       let upper = this;
-
       res.data.campuses.map( (item) => {
         upper.setState(prevState => ({
           campusName: [...prevState.campusName, item.name],
@@ -44,6 +43,18 @@ class Map extends Component {
           })
         })
       });
+      // https://cisco-cmx.unit.ua/api/config/v1/maps/image/System%20Campus/UNIT.Factory/1st_Floor
+      // https://cisco-cmx.unit.ua/api/config/v1/maps/image/System%20Campus/UNIT.Factory/1st_Floor
+       url = config.location + 'api/config/v1/maps';
+
+       res = await axios.get(url, {
+               headers: {
+                   Authorization: header,
+               }
+           }
+          );
+        console.log(res)
+
     } catch (error){
       console.log(error)
     }

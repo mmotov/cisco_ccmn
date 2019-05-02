@@ -91,7 +91,8 @@ class ImgMediaCard extends React.Component{
 
             >
             <CardActionArea>
-              {this.image()}
+                {this.image()}
+                <img src='https://RO:just4reading@cisco-cmx.unit.ua/api/config/v1/maps/image/System%20Campus/UNIT.Factory/2nd_Floor' />
               <CssBaseline />
               <CardContent>
                 <Typography component="p">
