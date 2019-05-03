@@ -9,6 +9,31 @@ var app = express();
 
 app.use('/images', express.static(process.cwd() + '/images'))
 
+app.get('/floorImage', function (req, res){
+  var url =  req.query['url'];
+
+  if (!url){
+    res.status(400).json({status:"error"});
+    return ;
+  }
+  auth = "Basic " + new Buffer("RO:just4reading").toString("base64");
+  console.log(url)
+  request({
+            url : url,
+            headers : {
+              "Authorization" : auth
+          }}, function(error, response, body) {
+            console.log(response.statusCode)
+            if (!error && response.statusCode == 200) {
+                console.log("lol")
+                res.send("data:" + response.headers["content-type"] + ";base64," + new Buffer(body).toString('base64'));
+            } else if (error) {
+                console.log('Error: ' + error);
+            }
+          });
+
+});
+
 app.post('/downloadImage', function (req, res) {
   var url =  req.query['url'];
   var title = req.query['title'];

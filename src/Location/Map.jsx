@@ -43,17 +43,6 @@ class Map extends Component {
           })
         })
       });
-      // https://cisco-cmx.unit.ua/api/config/v1/maps/image/System%20Campus/UNIT.Factory/1st_Floor
-      // https://cisco-cmx.unit.ua/api/config/v1/maps/image/System%20Campus/UNIT.Factory/1st_Floor
-       url = config.location + 'api/config/v1/maps';
-
-       res = await axios.get(url, {
-               headers: {
-                   Authorization: header,
-               }
-           }
-          );
-        console.log(res)
 
     } catch (error){
       console.log(error)

@@ -34,6 +34,8 @@ class ImgMediaCard extends React.Component{
     this.state = {
       floor: this.props.floor
     }
+    // this.image = this.image.bind(this);
+    // this.requist = this.requist.bind(this);
   }
 
   async componentWillReceiveProps(nextProps){
@@ -42,14 +44,19 @@ class ImgMediaCard extends React.Component{
       })
       if (nextProps.floor){
         try {
-          let url = config.location + 'api/location/v2/clients';
+          let url = config.location + "api/config/v1/maps/image" + nextProps.imageSrc;
           let header = (JSON.parse(localStorage.getItem('cisco_auth'))).location
           let res = await axios.get(url, {
                   headers: {
                       Authorization: header
                   }
               });
-              console.log(res.data)
+              let tmp = btoa(res.data)
+              this.setState({
+                img:"data:" + res.headers["content-type"] + ";base64," +  tmp,
+              }, function(){
+                console.log(this.state.img)
+              });
           // res.data.map(item => {
           //   console.log(item.mapInfo.floorRefId, item.mapCoordinate.x, item.mapCoordinate.y)
           // })
@@ -60,28 +67,19 @@ class ImgMediaCard extends React.Component{
   }
 
   image = () => {
-    if (!this.props.floor){
+    if (!this.state.img){
       return (<CardContent>
         <Typography gutterBottom variant="h5" component="h2">
           Please select floor, building and cumpus
         </Typography>
       </CardContent>);
     }
-    try {
-      let res = await axios.get("/floorImage", {
-              params: {
-                  url: this.props.imageSrc,
-              }
-          });
-      } catch (error){
-        console.log(error)
-      }
     return (<CardMedia
       component="img"
       alt="Contemplative Reptile"
       className={this.props.media}
       height="auto"
-      image={res.data}
+      image={this.state.img}
       title="Contemplative Reptile"
     />);
   }
@@ -100,8 +98,7 @@ class ImgMediaCard extends React.Component{
 
             >
             <CardActionArea>
-                {this.image()}
-                <img src='https://RO:just4reading@cisco-cmx.unit.ua/api/config/v1/maps/image/System%20Campus/UNIT.Factory/2nd_Floor' />
+              {this.image()}
               <CssBaseline />
               <CardContent>
                 <Typography component="p">
