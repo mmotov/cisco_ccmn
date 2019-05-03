@@ -67,12 +67,21 @@ class ImgMediaCard extends React.Component{
         </Typography>
       </CardContent>);
     }
+    try {
+      let res = await axios.get("/floorImage", {
+              params: {
+                  url: this.props.imageSrc,
+              }
+          });
+      } catch (error){
+        console.log(error)
+      }
     return (<CardMedia
       component="img"
       alt="Contemplative Reptile"
       className={this.props.media}
       height="auto"
-      image={"https://cisco-cmx.unit.ua/api/config/v1/maps/image" + this.props.imageSrc}
+      image={res.data}
       title="Contemplative Reptile"
     />);
   }
