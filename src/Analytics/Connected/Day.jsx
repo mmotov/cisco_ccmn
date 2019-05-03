@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
+import {Grid} from "@material-ui/core";
 import { BarChart, Bar, CartesianGrid, XAxis, YAxis, ResponsiveContainer, Tooltip } from 'recharts';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
+import PollIcon from '@material-ui/icons/Poll';
 import { getPresenceParams } from '../../requests/credentials';
 import axios from "axios";
-import {Grid} from "@material-ui/core";
+import SearchIcon from "@material-ui/core/SvgIcon/SvgIcon";
+
 
 
 
@@ -116,28 +122,36 @@ class Day extends Component {
 		chart = this.setChartData(chart,'visitors');
 		chart = this.setChartData(chart,'passerby');
 		return (
-			<div>
-				<Grid container direction={"row"} className={"wrapper-sm-24 m-b-24"}>
-					<Grid item xs={12} className={"wrapper-24 FlexRow SpaceAround"}>
-						<div onClick={() => this.hideData("connected")} className={"LegendItem"} style={{backgroundColor: "#2e7d32", opacity: this.state.show.connected ? 1 : 0.6}}>Connected</div>
-						<div onClick={() => this.hideData("visitors")} className={"LegendItem"} style={{backgroundColor: "#ff0043", opacity: this.state.show.visitors ? 1 : 0.6}}>Visitors</div>
-						<div onClick={() => this.hideData("passerby")} className={"LegendItem"} style={{backgroundColor: "#0069fc", opacity: this.state.show.passerby ? 1 : 0.6}}>Passerby</div>
+			<Card>
+				<CardContent>
+					<Grid container direction={"row"} className={"wrapper-sm-24 m-b-24"}>
+						<PollIcon />
+						<Typography style={{margin: '5px 4px'}} color="textSecondary" gutterBottom>Proximity</Typography>
 					</Grid>
-				</Grid>
-				<ResponsiveContainer width="90%" height={500}>
-					<BarChart data={chart}>
+					<div>
+						<Grid container direction={"row"} className={"wrapper-sm-24 m-b-24"}>
+							<Grid item xs={12} className={"wrapper-24 FlexRow SpaceAround"}>
+								<div onClick={() => this.hideData("connected")} className={"LegendItem"} style={{backgroundColor: "#2e7d32", opacity: this.state.show.connected ? 1 : 0.6}}>Connected</div>
+								<div onClick={() => this.hideData("visitors")} className={"LegendItem"} style={{backgroundColor: "#ff0043", opacity: this.state.show.visitors ? 1 : 0.6}}>Visitors</div>
+								<div onClick={() => this.hideData("passerby")} className={"LegendItem"} style={{backgroundColor: "#0069fc", opacity: this.state.show.passerby ? 1 : 0.6}}>Passerby</div>
+							</Grid>
+						</Grid>
+						<ResponsiveContainer width="90%" height={500}>
+							<BarChart data={chart}>
 
-						{this.ChartBar("connected", "#2e7d32")}
-						{this.ChartBar("visitors", "#ff0043")}
-						{this.ChartBar("passerby", "#0069fc")}
+								{this.ChartBar("connected", "#2e7d32")}
+								{this.ChartBar("visitors", "#ff0043")}
+								{this.ChartBar("passerby", "#0069fc")}
 
-						<CartesianGrid stroke="#ccc"/>
-						<XAxis dataKey="hour" height={60}/>
-						<YAxis />
-						<Tooltip />
-					</BarChart>
-				</ResponsiveContainer>
-			</div>
+								<CartesianGrid stroke="#ccc"/>
+								<XAxis dataKey="hour" height={60}/>
+								<YAxis />
+								<Tooltip />
+							</BarChart>
+						</ResponsiveContainer>
+					</div>
+				</CardContent>
+			</Card>
 		);
 	}
 }

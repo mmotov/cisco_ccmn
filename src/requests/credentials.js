@@ -3,7 +3,7 @@ import config from '../config.js'
 const siteId = 1513804707441;
 
 function getHeader(){
-	return (JSON.parse(localStorage.getItem('cisco_auth'))).location;
+	return (JSON.parse(localStorage.getItem('cisco_auth'))).presence;
 }
 
 export function getPresenceParams() {

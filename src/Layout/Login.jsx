@@ -40,7 +40,7 @@ class Login extends Component {
   async componentWillUnmount() {
     try{
       let url = config.presence + 'api/config/v1/sites';
-      let header = (JSON.parse(localStorage.getItem('cisco_auth'))).presense
+      let header = (JSON.parse(localStorage.getItem('cisco_auth'))).presence
       let res = await axios.get(config.presence + 'api/config/v1/sites', {
               headers: {
                   Authorization: header
@@ -59,7 +59,7 @@ class Login extends Component {
 
  handleSubmit() {
     localStorage.setItem('cisco_auth', JSON.stringify({
-      presense: "Base " + btoa(this.state.presenceUname + ":" + this.state.presencePass),
+      presence: "Base " + btoa(this.state.presenceUname + ":" + this.state.presencePass),
       location: "Base " + btoa(this.state.locationUname + ":" + this.state.locationPass),
     }));
   }
@@ -74,7 +74,7 @@ class Login extends Component {
           <CssBaseline />
           <Paper className="Paper">
             <Typography component="h1" variant="h5">
-              Credention
+              Credentials
             </Typography>
 
               <form className="form" onSubmit={this.handleSubmit.bind(this)}>

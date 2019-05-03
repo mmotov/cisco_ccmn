@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { getPresenceParams } from '../../requests/credentials';
 import axios from "axios";
-import { BarChart, Bar, CartesianGrid, XAxis, YAxis, ResponsiveContainer, Tooltip } from 'recharts';
+import {BarChart, Bar, CartesianGrid, XAxis, YAxis, ResponsiveContainer, Tooltip, Brush} from 'recharts';
 import {Grid} from "@material-ui/core";
 
 class Range extends Component {
@@ -137,6 +137,7 @@ class Range extends Component {
 						<XAxis dataKey="time" height={60}/>
 						<YAxis />
 						<Tooltip />
+						<Brush dataKey="time" height={30} stroke="#8884d8" />
 					</BarChart>
 				</ResponsiveContainer>
 			</div>
