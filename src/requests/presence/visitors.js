@@ -3,7 +3,7 @@ import config from '../../config.js'
 
 const siteId = 1513804707441;
 const baseUrl = config.presence;
-// const header = 'Base Uk86UGFzc3cwcmQ=';
+const header = 'Base Uk86UGFzc3cwcmQ=';
 
 function getHeader(){
   let header = (JSON.parse(localStorage.getItem('cisco_auth'))).presense;
@@ -53,15 +53,12 @@ export function visitorsToday() {
     });
 }
 
-export function visitorsHourlyToday() {
-    let url = baseUrl + 'api/presence/v1/connected/hourly/today';
+export function visitorsHourly(params) {
+    let url = baseUrl + 'api/presence/v1/connected/hourly';
+    params.siteId = siteId;
     let headers = {
-        headers: {
-            Authorization: getHeader()
-        },
-        params: {
-            siteId: siteId
-        }
+        headers: { Authorization: header},
+        params: params
     };
 
     return new Promise((resolve, reject) => {
