@@ -38,6 +38,8 @@ class ImgMediaCard extends React.Component{
     // this.requist = this.requist.bind(this);
   }
 
+
+
   async componentWillReceiveProps(nextProps){
       this.setState({
         floor: nextProps.floor
@@ -48,18 +50,14 @@ class ImgMediaCard extends React.Component{
           let header = (JSON.parse(localStorage.getItem('cisco_auth'))).location
           let res = await axios.get(url, {
                   headers: {
-                      Authorization: header
-                  }
+                      Authorization: header,
+                  },
+                  responseType: 'arraybuffer'
               });
-              let tmp = btoa(res.data)
+
               this.setState({
-                img:"data:" + res.headers["content-type"] + ";base64," +  tmp,
-              }, function(){
-                console.log(this.state.img)
+                img: "data:image/png;base64," +  new Buffer(res.data).toString('base64'),
               });
-          // res.data.map(item => {
-          //   console.log(item.mapInfo.floorRefId, item.mapCoordinate.x, item.mapCoordinate.y)
-          // })
         } catch (error){
           console.log(error)
         }
