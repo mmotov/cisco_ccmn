@@ -69,7 +69,7 @@ class Range extends Component {
 					<CardContent>
 						<Grid container direction={"row"} className={"wrapper-sm-24 m-b-24"}>
 							<AccessTimeIcon />
-							<Typography style={{margin: '5px 4px'}} color="textSecondary" gutterBottom>Proximity</Typography>
+							<Typography style={{margin: '5px 4px'}} color="textSecondary" gutterBottom>Dwell Time</Typography>
 						</Grid>
 						<div>
 							<Grid container direction={"row"} className={"wrapper-sm-24 m-b-24"}>

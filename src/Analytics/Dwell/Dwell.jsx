@@ -2,8 +2,9 @@ import React, {Component} from 'react';
 import Grid from "@material-ui/core/Grid";
 import {getPresenceParams} from "../../requests/credentials";
 import axios from "axios";
-import Day from "../Dwell/Daily";
-import Range from "../Dwell/Range";
+import Day from "./Daily";
+import Range from "./Range";
+import TotalCount from "./TotalCount";
 
 class Dwell extends Component {
 	constructor(props) {
@@ -11,7 +12,8 @@ class Dwell extends Component {
 		this.state = {
 			startDate: this.props.startDate,
 			endDate: this.props.endDate,
-			dwellTime: []
+			dwellTime: [],
+			countDwellTime: {}
 		};
 	}
 
@@ -37,6 +39,7 @@ class Dwell extends Component {
 
 	fetchAll = () => {
 		this.fetchDwellTime();
+		this.fetchCountDwellTime();
 	};
 
 	fetchDwellTime() {
@@ -52,6 +55,19 @@ class Dwell extends Component {
 			});
 	}
 
+	fetchCountDwellTime() {
+		let request = getPresenceParams();
+		request.data.params = {...request.data.params, ...this.buildQueryDateParams()};
+		axios.get(request.baseUrl + 'api/presence/v1/dwell/count', request.data)
+			.then((result) => {
+				console.log('RESPONSE: ', result.data);
+				this.setState({countDwellTime: result.data});
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	}
+
 	RenderDwell = () => {
 		if (this.state.startDate === this.state.endDate) {
 			return (<Day dwellTime={this.state.dwellTime} />);
@@ -61,12 +77,14 @@ class Dwell extends Component {
 	};
 
 	render() {
-		console.log('STATE DWELL: ', this.state.dwellTime);
 		return (
 			<div>
 				<Grid container direction={"row"} spacing={24} className={"sm-no-spacing"}>
-					<Grid item xs={12} md={8}>
+					<Grid item xs={12} md={8} className={"m-t-sm-24"}>
 						{this.RenderDwell()}
+					</Grid>
+					<Grid item xs={12} md={4} className={"m-t-sm-24"}>
+						<TotalCount countDwellTime={this.state.countDwellTime} />
 					</Grid>
 				</Grid>
 			</div>

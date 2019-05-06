@@ -14,6 +14,14 @@ const keyNames = {
 	EIGHT_PLUS_HOURS: '8+ hrs'
 };
 
+const COLORS = {
+	FIVE_TO_THIRTY_MINUTES: '#4caf50',
+	THIRTY_TO_SIXTY_MINUTES: '#f57f17',
+	ONE_TO_FIVE_HOURS: '#2196f3',
+	FIVE_TO_EIGHT_HOURS: '#1a237e',
+	EIGHT_PLUS_HOURS: '#b71c1c'
+};
+
 class Daily extends Component {
 
 	constructor(props) {
@@ -63,21 +71,21 @@ class Daily extends Component {
 		let chart = [];
 		chart = this.setChartData(chart);
 		return (
-			<div className={"m-t-sm-24"}>
+			<div>
 				<Card>
 					<CardContent>
 						<Grid container direction={"row"} className={"wrapper-sm-24 m-b-24"}>
 							<AccessTimeIcon />
-							<Typography style={{margin: '5px 4px'}} color="textSecondary" gutterBottom>Proximity</Typography>
+							<Typography style={{margin: '5px 4px'}} color="textSecondary" gutterBottom>Dwell Time</Typography>
 						</Grid>
 						<div>
 							<Grid container direction={"row"} className={"wrapper-sm-24 m-b-24"}>
 								<Grid item xs={12} className={"wrapper-24 FlexRow SpaceAround"}>
-									<div onClick={() => this.hideData("FIVE_TO_THIRTY_MINUTES")}    className={"LegendItem"} style={{backgroundColor: "#4caf50", opacity: this.state.FIVE_TO_THIRTY_MINUTES ? 1 : 0.6}}>5-30 min</div>
-									<div onClick={() => this.hideData("THIRTY_TO_SIXTY_MINUTES")}   className={"LegendItem"} style={{backgroundColor: "#f57f17", opacity: this.state.THIRTY_TO_SIXTY_MINUTES ? 1 : 0.6}}>30-60 min</div>
-									<div onClick={() => this.hideData("ONE_TO_FIVE_HOURS")}         className={"LegendItem"} style={{backgroundColor: "#2196f3", opacity: this.state.ONE_TO_FIVE_HOURS ? 1 : 0.6}}>1-5 hrs</div>
-									<div onClick={() => this.hideData("FIVE_TO_EIGHT_HOURS")}       className={"LegendItem"} style={{backgroundColor: "#1a237e", opacity: this.state.FIVE_TO_EIGHT_HOURS ? 1 : 0.6}}>5-8 hrs</div>
-									<div onClick={() => this.hideData("EIGHT_PLUS_HOURS")}          className={"LegendItem"} style={{backgroundColor: "#b71c1c", opacity: this.state.EIGHT_PLUS_HOURS ? 1 : 0.6}}>8+ hrs</div>
+									<div onClick={() => this.hideData("FIVE_TO_THIRTY_MINUTES")}    className={"LegendItem"} style={{backgroundColor: COLORS["FIVE_TO_THIRTY_MINUTES"], opacity: this.state.FIVE_TO_THIRTY_MINUTES ? 1 : 0.6}}>5-30 min</div>
+									<div onClick={() => this.hideData("THIRTY_TO_SIXTY_MINUTES")}   className={"LegendItem"} style={{backgroundColor: COLORS["THIRTY_TO_SIXTY_MINUTES"], opacity: this.state.THIRTY_TO_SIXTY_MINUTES ? 1 : 0.6}}>30-60 min</div>
+									<div onClick={() => this.hideData("ONE_TO_FIVE_HOURS")}         className={"LegendItem"} style={{backgroundColor: COLORS["ONE_TO_FIVE_HOURS"], opacity: this.state.ONE_TO_FIVE_HOURS ? 1 : 0.6}}>1-5 hrs</div>
+									<div onClick={() => this.hideData("FIVE_TO_EIGHT_HOURS")}       className={"LegendItem"} style={{backgroundColor: COLORS["FIVE_TO_EIGHT_HOURS"], opacity: this.state.FIVE_TO_EIGHT_HOURS ? 1 : 0.6}}>5-8 hrs</div>
+									<div onClick={() => this.hideData("EIGHT_PLUS_HOURS")}          className={"LegendItem"} style={{backgroundColor: COLORS["EIGHT_PLUS_HOURS"], opacity: this.state.EIGHT_PLUS_HOURS ? 1 : 0.6}}>8+ hrs</div>
 								</Grid>
 							</Grid>
 							<ResponsiveContainer width="100%" height={500}>
