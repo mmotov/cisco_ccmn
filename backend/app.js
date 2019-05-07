@@ -1,9 +1,9 @@
 
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+// process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 var express = require('express');
-var request = require('request');
-var fs      = require('fs');
-const { createCanvas, loadImage, Image } = require('canvas')
+// var request = require('request');
+// var fs      = require('fs');
+// const { createCanvas, loadImage, Image } = require('canvas')
 
 var app = express();
 
@@ -96,6 +96,11 @@ app.get('/lol', function (req, res){
     ctx.stroke();
     res.send('<img src="' + canvas.toDataURL() + '" />')
   });
+})
+
+
+app.get('/hello', function(req, res){
+  res.send('Hello world');
 })
 
 app.listen(3000, function () {
