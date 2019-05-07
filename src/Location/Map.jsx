@@ -38,7 +38,7 @@ class Map extends Component {
           item.floorList.map( item => {
             upper.setState(prevState => ({
               floorList: [...prevState.floorList, item.name],
-              [item.name]: item.aesUidString,
+              [item.name]: item.aesUidString
             }))
           })
         })
@@ -74,7 +74,10 @@ class Map extends Component {
             justify="center"
             alignItems="flex-start"
             >
-            <ImgMediaCard imageSrc={"/" + this.state.campus + "/" + this.state.bulding + "/" + this.state.floor} floor={this.state[this.state.floor]} />
+            <ImgMediaCard 
+              imageSrc={"/" + this.state.campus + "/" + this.state.bulding + "/" + this.state.floor}
+              floor={this.state[this.state.floor]}
+               />
 
       </Grid>
       </div>

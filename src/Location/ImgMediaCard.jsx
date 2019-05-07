@@ -10,7 +10,9 @@ import Typography from '@material-ui/core/Typography';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import CustomizedInputBase from './CustomizedInputBase.jsx'
 import Grid from '@material-ui/core/Grid';
-import { Stage, Layer, Image, Rect } from 'react-konva';
+import { Stage, Layer, Rect } from 'react-konva';
+import windowSize from 'react-window-size';
+import UsersLocation from './UsersLocation.jsx';
 
 const styles = theme => ({
   card: {
@@ -24,58 +26,6 @@ const styles = theme => ({
   },
 });
 
-class URLImage extends React.Component {
-  state = {
-    image: null
-  };
-  componentDidMount() {
-    this.loadImage();
-  }
-  componentDidUpdate(oldProps) {
-    if (oldProps.src !== this.props.src) {
-      this.loadImage();
-    }
-  }
-  componentWillUnmount() {
-    this.image.removeEventListener('load', this.handleLoad);
-  }
-  loadImage() {
-    // save to "this" to remove "load" handler on unmount
-    this.image = new window.Image();
-    this.image.src = this.props.src;
-    this.image.addEventListener('load', this.handleLoad);
-  }
-  handleLoad = () => {
-    console.log(this.image.width, this.image.height)
-    // after setState react-konva will update canvas and redraw the layer
-    // because "image" property is changed
-    this.setState({
-      image: this.image,
-      width: this.image.width,
-      height: this.image.height,
-    });
-    // if you keep same image object during source updates
-    // you will have to update layer manually:
-    // this.imageNode.getLayer().batchDraw();
-  };
-  render() {
-    return (
-      <Image
-        x={this.props.x}
-        y={this.props.y}
-        width={this.props.width}
-        height={this.props.height}
-        image={this.state.image}
-        ref={node => {
-          this.imageNode = node;
-        }}
-      />
-    );
-  }
-}
-
-
-
 class ImgMediaCard extends React.Component {
 
   constructor(props) {
@@ -87,9 +37,6 @@ class ImgMediaCard extends React.Component {
 
 
   async componentWillReceiveProps(nextProps) {
-    this.setState({
-      floor: nextProps.floor
-    })
     if (nextProps.floor) {
       // Try rebuid by async request
       try {
@@ -104,8 +51,7 @@ class ImgMediaCard extends React.Component {
         let tmp = "data:image/png;base64," + new Buffer(res.data).toString('base64');
         this.setState({
           img: tmp,
-        }, function () {
-          console.log("lol")
+          floor: nextProps.floor
         });
 
       } catch (error) {
@@ -126,25 +72,16 @@ class ImgMediaCard extends React.Component {
       </Typography>
       </CardContent>);
     } else {
+      let width = this.props.windowWidth - 200;
+      let height = (this.props.windowWidth - 200)/2;
       image = (
-        <Stage width={600} height={300}>
-          <Layer>
-            <URLImage src={this.state.img} x={0} y={0} width={600} height={300} />
-            <Rect
-              x={0}
-              y={0}
-              width={10}
-              height={10}
-              fill="red"
-              onClick={this.handleClick}
-            />
-          </Layer>
+        <Stage width={width} height={height}>
+          <UsersLocation floor={this.state.floor} src={this.state.img} width={width} height={height} />
         </Stage>);
     }
-
     return (
 
-      <Card lol="lol" className={classes.card}>
+      <Card className={classes.card}>
         <Grid
           container
           direction="column"
@@ -180,4 +117,4 @@ ImgMediaCard.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(ImgMediaCard);
+export default withStyles(styles)(windowSize(ImgMediaCard));
