@@ -3,6 +3,7 @@ import axios from 'axios/index';
 import config from '../config.js';
 import URLImage from './URLImage.jsx';
 import { Layer, Rect } from 'react-konva';
+import { resolve } from 'q';
 
 class UsersLocation extends React.Component {
     constructor(props) {
@@ -18,43 +19,38 @@ class UsersLocation extends React.Component {
     }
 
     updateCurent = () => {
-        let ind = 0
-        this.state.users.map((item) => {
-            if (this.props.floor == item.mapInfo.floorRefId) {
-                if (ind === 0) {
-                    this.setState(prevState => ({
-                        current: [item]
-                    }));
-                } else {
+        this.setState({
+            current: [],
+        }, function () {
+            this.state.users.map((item) => {
+                if (this.props.floor == item.mapInfo.floorRefId) {
                     this.setState(prevState => ({
                         current: [...prevState.current, item]
                     }));
                 }
-            }
-            ind++;
+            })
         });
     }
 
-    componentWillReceiveProps(nextProps) {
-        let ind = 0
+    async componentWillReceiveProps(nextProps) {
+        let width = await this.scaleWidth(nextProps.src, nextProps.width);
+        let height = await this.scaleHeight(nextProps.src, nextProps.height);
         this.setState({
-            scaleWidth: this.scaleWidth(nextProps.src, nextProps.width),
-            scaleHeight: this.scaleHeight(nextProps.src, nextProps.height),
+            scaleWidth: width,
+            scaleHeight: height,
         })
-        this.state.users.map((item) => {
-            if (nextProps.floor == item.mapInfo.floorRefId) {
-                if (ind === 0) {
-                    this.setState(prevState => ({
-                        current: [item]
-                    }));
-                } else {
+        this.setState({
+            current: [],
+        }, function () {
+            this.state.users.map((item) => {
+                if (nextProps.floor == item.mapInfo.floorRefId) {
                     this.setState(prevState => ({
                         current: [...prevState.current, item]
                     }));
                 }
-            }
-            ind++;
+            })
         });
+
     }
 
     componentDidMount() {
@@ -65,7 +61,6 @@ class UsersLocation extends React.Component {
                 Authorization: header,
             }
         }).then((res) => {
-            console.log(res.data)
             this.setState({
                 users: res.data,
             }, this.updateCurent);
@@ -74,33 +69,36 @@ class UsersLocation extends React.Component {
         });
     }
 
-    componentWillMount(){
-        console.log(111111)
+    async componentWillMount() {
+        let width = await this.scaleWidth(this.props.src, this.props.width);
+        let height = await this.scaleHeight(this.props.src, this.props.height);
         this.setState({
-            scaleWidth: this.scaleWidth(this.props.src, this.props.width),
-            scaleHeight: this.scaleHeight(this.props.src, this.props.height),
+            scaleWidth: width,
+            scaleHeight: height,
         })
     }
 
-    scaleWidth(src, width){
+    scaleWidth(src, width) {
         let image = new Image();
         image.src = src;
-        let image2 = new Image();
-        image2.src = src;
-        console.log(image.src)
-        console.log(image.width)
-        console.log(image2.width)
-        console.log(width / image.width)
-        return (width / image.width);
+        return new Promise((resolve, reject) => {
+            image.onload = function () {
+                resolve(width / image.width);
+            };
+        });
     }
 
-    scaleHeight(src, height){
+    scaleHeight(src, height) {
         let image = new window.Image();
         image.src = src;
-        return (height / image.height);
+        return new Promise((resolve, reject) => {
+            image.onload = function () {
+                resolve(height / image.height);
+            };
+        });
     }
 
-    render() {      
+    render() {
         return (
             <Layer>
                 <URLImage src={this.props.src} x={0} y={0} width={this.props.width} height={this.props.height} />
