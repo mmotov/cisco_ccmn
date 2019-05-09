@@ -56,11 +56,13 @@ class UsersLocation extends React.Component {
     componentDidMount() {
         let url = config.location + "api/location/v2/clients";
         let header = (JSON.parse(localStorage.getItem('cisco_auth'))).location
+        let upper = this
         axios.get(url, {
             headers: {
                 Authorization: header,
             }
         }).then((res) => {
+            upper.props.updateParam(res.data)
             this.setState({
                 users: res.data,
             }, this.updateCurent);

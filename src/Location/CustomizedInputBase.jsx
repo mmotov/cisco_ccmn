@@ -29,17 +29,26 @@ const styles = {
   },
 };
 
-function CustomizedInputBase(props) {
-  const { classes } = props;
+class CustomizedInputBase extends React.Component {
+  constructor(props) {
+    super(props);
+  }
 
-  return (
-    <Paper className={classes.root} elevation={1}>
-      <InputBase className={classes.input} placeholder="Search macaddress or login" />
-      <IconButton className={classes.iconButton} aria-label="Search">
-        <SearchIcon />
-      </IconButton>
-    </Paper>
-  );
+  handleClick = () => {
+    alert(1)
+  }
+
+  render() {
+    const { classes } = this.props;
+    return (
+      <Paper className={classes.root} elevation={1}>
+        <InputBase className={classes.input} placeholder="Search macaddress or login" />
+        <IconButton className={classes.iconButton} aria-label="Search" >
+          <SearchIcon onClick={this.handleClick} />
+        </IconButton>
+      </Paper>
+    );
+  }
 }
 
 CustomizedInputBase.propTypes = {

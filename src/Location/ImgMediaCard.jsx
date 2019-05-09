@@ -24,6 +24,22 @@ const styles = theme => ({
     // ⚠️ object-fit is not supported by IE 11.
     objectFit: 'cover',
   },
+  scroll: {
+    overflowY: 'scroll',
+    height: '100%',
+  },
+  container: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    height: "100%"
+  },
+  containerInput: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-end",
+  }
+
 });
 
 class ImgMediaCard extends React.Component {
@@ -60,6 +76,12 @@ class ImgMediaCard extends React.Component {
     }
   }
 
+  setAllUsers = (param) => {
+    this.setState({
+      allUser: param
+    })
+  }
+
   render() {
 
     const { classes } = this.props;
@@ -73,10 +95,10 @@ class ImgMediaCard extends React.Component {
       </CardContent>);
     } else {
       let width = this.props.windowWidth - 200;
-      let height = (this.props.windowWidth - 200)/2;
+      let height = (this.props.windowWidth - 200) / 2;
       image = (
         <Stage width={width} height={height}>
-          <UsersLocation floor={this.state.floor} src={this.state.img} width={width} height={height} />
+          <UsersLocation floor={this.state.floor} src={this.state.img} width={width} height={height} updateParam={this.setAllUsers} />
         </Stage>);
     }
     return (
@@ -87,25 +109,19 @@ class ImgMediaCard extends React.Component {
           direction="column"
           justify="space-between"
         >
-          <CardActionArea>
+          <div className={classes.container}>
             {image}
+            
+            <div className={classes.containerInput}>
             <CssBaseline />
-            <CardContent>
-              <Typography component="p">
-                Hi, @xlogin or mac: 00:00:2a:01:00:06 now is on the first floor.
-                </Typography>
-              <Typography component="p">
-                Hi, @xlogin or mac: 00:00:2a:01:00:06 now is on the first floor.
-                </Typography>
-              <Typography component="p">
-                Hi, @xlogin or mac: 00:00:2a:01:00:06 now is on the first floor.
-                </Typography>
+            <CardContent className={classes.scroll}>
               <Typography component="p">
                 Hi, @xlogin or mac: 00:00:2a:01:00:06 now is on the first floor.
                 </Typography>
             </CardContent>
-          </CardActionArea>
-          <CustomizedInputBase />
+            <CustomizedInputBase />
+            </div>
+          </div>
         </Grid>
       </Card>
 
