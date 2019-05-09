@@ -1,19 +1,19 @@
 import React, {Component} from 'react';
 import Grid from "@material-ui/core/Grid";
-import {getPresenceParams} from "../../requests/credentials";
 import axios from "axios";
-import TotalCount from "./TotalCount";
-import ChartDwell from "./ChartDwell";
+import {getPresenceParams} from "../../requests/credentials";
+import ChartRepeatVisitors from "./ChartRepeatVisitors";
 
-class Dwell extends Component {
+
+class RepeatVisitors extends Component {
 
 	constructor(props) {
 		super(props);
 		this.state = {
 			startDate: this.props.startDate,
 			endDate: this.props.endDate,
-			dwellTime: [],
-			countDwellTime: {}
+			repeatVisitors: [],
+			// countDwellTime: {}
 		};
 	}
 
@@ -21,7 +21,7 @@ class Dwell extends Component {
 		this.setState({
 				startDate: nextProps.startDate,
 				endDate: nextProps.endDate,
-				dwellTime: []
+				repeatVisitors: []
 			},
 			() => { this.fetchAll() });
 	}
@@ -38,30 +38,17 @@ class Dwell extends Component {
 	};
 
 	fetchAll = () => {
-		this.fetchDwellTime();
-		this.fetchCountDwellTime();
+		this.fetchRepeatVisitors();
+		// this.fetchCountDwellTime();
 	};
 
-	fetchDwellTime() {
+	fetchRepeatVisitors() {
 		let request = getPresenceParams();
 		let timeSection = this.state.startDate === this.state.endDate ? 'hourly' : 'daily';
 		request.data.params = {...request.data.params, ...this.buildQueryDateParams()};
-		axios.get(request.baseUrl + 'api/presence/v1/dwell/' + timeSection, request.data)
+		axios.get(request.baseUrl + 'api/presence/v1/repeatvisitors/' + timeSection, request.data)
 			.then((result) => {
-				this.setState({dwellTime: result.data});
-			})
-			.catch((error) => {
-				console.log(error);
-			});
-	}
-
-	fetchCountDwellTime() {
-		let request = getPresenceParams();
-		request.data.params = {...request.data.params, ...this.buildQueryDateParams()};
-		axios.get(request.baseUrl + 'api/presence/v1/dwell/count', request.data)
-			.then((result) => {
-				console.log('RESPONSE: ', result.data);
-				this.setState({countDwellTime: result.data});
+				this.setState({repeatVisitors: result.data});
 			})
 			.catch((error) => {
 				console.log(error);
@@ -71,15 +58,18 @@ class Dwell extends Component {
 	isRange = () => {
 		return this.state.startDate !== this.state.endDate;
 	};
+
+// <TotalCount countDwellTime={this.state.countDwellTime} />
+
 	render() {
 		return (
 			<div>
 				<Grid container direction={"row"} spacing={24} className={"sm-no-spacing"}>
 					<Grid item xs={12} md={8} className={"m-t-sm-24"}>
-						<ChartDwell range={this.isRange()} dwellTime={this.state.dwellTime} />
+						<ChartRepeatVisitors range={this.isRange()} repeatVisitors={this.state.repeatVisitors} />
 					</Grid>
 					<Grid item xs={12} md={4} className={"m-t-sm-24"}>
-						<TotalCount countDwellTime={this.state.countDwellTime} />
+
 					</Grid>
 				</Grid>
 			</div>
@@ -87,4 +77,4 @@ class Dwell extends Component {
 	}
 }
 
-export default Dwell;
+export default RepeatVisitors;

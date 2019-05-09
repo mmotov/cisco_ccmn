@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
 import Grid from "@material-ui/core/Grid";
-import TotalCount from "./TotalCount";
-import Daily from "./Daily";
-import Range from "./Range";
-import {getPresenceParams} from "../../requests/credentials";
 import axios from "axios";
+import {getPresenceParams} from "../../requests/credentials";
+import TotalCount from "./TotalCount";
+import ChartProximity from "./ChartProximity";
 
 class Proximity extends Component {
 
@@ -19,7 +18,6 @@ class Proximity extends Component {
 			visitors: [],
 			connected: [],
 			passerby: []
-
 		};
 	}
 
@@ -35,6 +33,9 @@ class Proximity extends Component {
 		this.fetchConnected();
 		this.fetchPasserby();
 		this.fetchVisitors();
+
+
+
 		this.fetchCountVisitors();
 		this.fetchCountConnected();
 		this.fetchCountPasserby();
@@ -130,19 +131,11 @@ class Proximity extends Component {
 		}
 	};
 
-	RenderConnected = () => {
-		if (this.state.startDate === this.state.endDate) {
-			return (<Daily visitors={this.state.visitors} connected={this.state.connected} passerby={this.state.passerby} />);
-		} else {
-			return (<Range visitors={this.state.visitors} connected={this.state.connected} passerby={this.state.passerby} />);
-		}
-	};
-
 	render() {
 		return (
 			<Grid container direction={"row"} spacing={24} className={"sm-no-spacing"}>
 				<Grid item xs={12} md={8}>
-					{this.RenderConnected()}
+					<ChartProximity visitors={this.state.visitors} connected={this.state.connected} passerby={this.state.passerby} />
 				</Grid>
 				<Grid item xs={12} md={4}>
 					<TotalCount visitors={this.state.visitorsCount} connected={this.state.connectedCount} passerby={this.state.passerbyCount}/>
