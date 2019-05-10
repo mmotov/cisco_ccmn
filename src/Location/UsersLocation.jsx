@@ -3,7 +3,6 @@ import axios from 'axios/index';
 import config from '../config.js';
 import URLImage from './URLImage.jsx';
 import { Layer, Rect } from 'react-konva';
-import { resolve } from 'q';
 
 class UsersLocation extends React.Component {
     constructor(props) {
@@ -23,7 +22,7 @@ class UsersLocation extends React.Component {
             current: [],
         }, function () {
             this.state.users.map((item) => {
-                if (this.props.floor == item.mapInfo.floorRefId) {
+                if (this.props.floor === item.mapInfo.floorRefId) {
                     this.setState(prevState => ({
                         current: [...prevState.current, item]
                     }));
@@ -43,7 +42,7 @@ class UsersLocation extends React.Component {
             current: [],
         }, function () {
             this.state.users.map((item) => {
-                if (nextProps.floor == item.mapInfo.floorRefId) {
+                if (nextProps.floor === item.mapInfo.floorRefId) {
                     this.setState(prevState => ({
                         current: [...prevState.current, item]
                     }));
@@ -106,13 +105,13 @@ class UsersLocation extends React.Component {
                 <URLImage src={this.props.src} x={0} y={0} width={this.props.width} height={this.props.height} />
                 {this.state.current.map((item, ind) => {
                     return (<Rect
+                        titile="lol"
                         key={ind}
                         x={item.mapCoordinate.x * this.state.scaleWidth}
                         y={item.mapCoordinate.y * this.state.scaleHeight}
                         width={10}
                         height={10}
                         fill="green"
-                        onClick={this.handleClick}
                     />);
                 })}
             </Layer>

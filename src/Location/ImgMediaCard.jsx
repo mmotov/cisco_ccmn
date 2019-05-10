@@ -4,15 +4,14 @@ import axios from 'axios/index';
 import config from '../config.js';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import CustomizedInputBase from './CustomizedInputBase.jsx'
+
 import Grid from '@material-ui/core/Grid';
 import { Stage, Layer, Rect } from 'react-konva';
 import windowSize from 'react-window-size';
 import UsersLocation from './UsersLocation.jsx';
+import Search from './Search.jsx';
 
 const styles = theme => ({
   card: {
@@ -24,21 +23,13 @@ const styles = theme => ({
     // ⚠️ object-fit is not supported by IE 11.
     objectFit: 'cover',
   },
-  scroll: {
-    overflowY: 'scroll',
-    height: '100%',
-  },
   container: {
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",
     height: "100%"
-  },
-  containerInput: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "flex-end",
   }
+  
 
 });
 
@@ -110,17 +101,8 @@ class ImgMediaCard extends React.Component {
           justify="space-between"
         >
           <div className={classes.container}>
-            {image}
-            
-            <div className={classes.containerInput}>
-            <CssBaseline />
-            <CardContent className={classes.scroll}>
-              <Typography component="p">
-                Hi, @xlogin or mac: 00:00:2a:01:00:06 now is on the first floor.
-                </Typography>
-            </CardContent>
-            <CustomizedInputBase />
-            </div>
+            {image}            
+            <Search users={this.state.allUser} />
           </div>
         </Grid>
       </Card>
