@@ -51,17 +51,49 @@ class Search extends React.Component {
     this.setState({ userInput: event.target.value });
   }
 
+  validate = (str) => {
+    if (str.match(/^([a-fA-F0-9]{2}:){5}([a-fA-F0-9]{2})$/g) ||
+        str.match(/^([a-z]{3,8})$/g)){
+      return true;
+    }
+    return false;
+  }
+
   handleClick = () => {
     
     let tmp = this.state.userInput;
+    let verdict = this.validate(tmp)
+
+    if (tmp === "") { return ;}
+    // validation if floor is choosen
+    if (!this.props.users){
+      this.setState(prevState => ({
+        listOfsearch: [...prevState.listOfsearch, "Pls, choose floor"],
+        userInput: ""
+      }));
+      return 
+    }
+    // search from array macaddres of username
     this.props.users.map(item => {
-      console.log(item.userName)
+      let res = "";
       if (item.userName === tmp){
-        console.log("vin");
+        console.log("find username ", item.mapInfo.mapHierarchyString);
+        res = "Find " + item.userName + " at " + item.mapInfo.mapHierarchyString;
+      } else if (item.macAddress === tmp){
+        console.log("find macaddress", item);
+        res = "Find " + item.macAddress + " at " + item.mapInfo.mapHierarchyString;
+      }
+      if (res !== ""){
+        this.setState(prevState => ({
+          listOfsearch: [...prevState.listOfsearch, res],
+          userInput: ""
+        }));
+        return ;
       }
     })
+    // handle wrong input
     this.setState(prevState => ({
-      listOfsearch: [...prevState.listOfsearch, prevState.userInput],
+      listOfsearch: [...prevState.listOfsearch, verdict ? prevState.userInput : "Wrond input"],
       userInput: ""
     }));
   }
