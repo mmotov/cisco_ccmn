@@ -3,6 +3,7 @@ import Grid from "@material-ui/core/Grid";
 import axios from "axios";
 import {getPresenceParams} from "../../requests/credentials";
 import ChartRepeatVisitors from "./ChartRepeatVisitors";
+import TotalCount from "./TotalCount";
 
 
 class RepeatVisitors extends Component {
@@ -13,7 +14,7 @@ class RepeatVisitors extends Component {
 			startDate: this.props.startDate,
 			endDate: this.props.endDate,
 			repeatVisitors: [],
-			// countDwellTime: {}
+			count: {}
 		};
 	}
 
@@ -39,7 +40,7 @@ class RepeatVisitors extends Component {
 
 	fetchAll = () => {
 		this.fetchRepeatVisitors();
-		// this.fetchCountDwellTime();
+		this.fetchCount();
 	};
 
 	fetchRepeatVisitors() {
@@ -55,6 +56,18 @@ class RepeatVisitors extends Component {
 			});
 	}
 
+	fetchCount() {
+		let request = getPresenceParams();
+		request.data.params = {...request.data.params, ...this.buildQueryDateParams()};
+		axios.get(request.baseUrl + 'api/presence/v1/repeatvisitors/count', request.data)
+			.then((result) => {
+				this.setState({count: result.data});
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	}
+
 	isRange = () => {
 		return this.state.startDate !== this.state.endDate;
 	};
@@ -63,16 +76,14 @@ class RepeatVisitors extends Component {
 
 	render() {
 		return (
-			<div>
-				<Grid container direction={"row"} spacing={24} className={"sm-no-spacing"}>
-					<Grid item xs={12} md={8} className={"m-t-sm-24"}>
-						<ChartRepeatVisitors range={this.isRange()} repeatVisitors={this.state.repeatVisitors} />
-					</Grid>
-					<Grid item xs={12} md={4} className={"m-t-sm-24"}>
-
-					</Grid>
+			<Grid container direction={"row"} spacing={24} className={"sm-no-spacing"}>
+				<Grid item xs={12} md={8} className={"m-t-sm-24"}>
+					<ChartRepeatVisitors range={this.isRange()} repeatVisitors={this.state.repeatVisitors} />
 				</Grid>
-			</div>
+				<Grid item xs={12} md={4} className={"m-t-sm-24"}>
+					<TotalCount count={this.state.count} />
+				</Grid>
+			</Grid>
 		);
 	}
 }

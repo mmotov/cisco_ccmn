@@ -131,13 +131,17 @@ class Proximity extends Component {
 		}
 	};
 
+	isRange = () => {
+		return this.state.startDate !== this.state.endDate;
+	};
+
 	render() {
 		return (
 			<Grid container direction={"row"} spacing={24} className={"sm-no-spacing"}>
-				<Grid item xs={12} md={8}>
-					<ChartProximity visitors={this.state.visitors} connected={this.state.connected} passerby={this.state.passerby} />
+				<Grid item xs={12} md={8} className={"m-t-sm-24"}>
+					<ChartProximity visitors={this.state.visitors} connected={this.state.connected} passerby={this.state.passerby} range={this.isRange()} />
 				</Grid>
-				<Grid item xs={12} md={4}>
+				<Grid item xs={12} md={4} className={"m-t-sm-24"}>
 					<TotalCount visitors={this.state.visitorsCount} connected={this.state.connectedCount} passerby={this.state.passerbyCount}/>
 				</Grid>
 			</Grid>

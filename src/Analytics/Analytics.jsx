@@ -6,6 +6,7 @@ import Header from "./Header";
 import Proximity from "./Proximity/Proximity";
 import Dwell from "./Dwell/Dwell";
 import RepeatVisitors from "./RepeatVisitors/RepeatVisitors";
+import Summary from "./Summary/Summary";
 
 class Analytics extends Component {
 	constructor(props) {
@@ -31,12 +32,15 @@ class Analytics extends Component {
 					<Grid item xs={12} className={"wrapper-24"}>
 						<Header handleParams={this.getQueryParams}/>
 					</Grid>
+					<Summary startDate={this.state.startDate} endDate={this.state.endDate} />
 					<Proximity      startDate={this.state.startDate} endDate={this.state.endDate} />
 					<Dwell          startDate={this.state.startDate} endDate={this.state.endDate} />
 					<RepeatVisitors startDate={this.state.startDate} endDate={this.state.endDate} />
 				</Grid>
 			</div>
 		);
+
+
 	}
 }
 

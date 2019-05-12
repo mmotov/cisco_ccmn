@@ -107,33 +107,31 @@ class ChartRepeatVisitors extends Component {
 		});
 
 		return (
-			<div>
-				<Card>
-					<CardContent>
+			<Card>
+				<CardContent>
+					<Grid container direction={"row"} className={"wrapper-sm-24 m-b-24"}>
+						<PeopleIcon />
+						<Typography style={{margin: '5px 4px'}} color="textSecondary" gutterBottom>Repeat Visitors</Typography>
+					</Grid>
+					<div>
 						<Grid container direction={"row"} className={"wrapper-sm-24 m-b-24"}>
-							<PeopleIcon />
-							<Typography style={{margin: '5px 4px'}} color="textSecondary" gutterBottom>Repeat Visitors</Typography>
-						</Grid>
-						<div>
-							<Grid container direction={"row"} className={"wrapper-sm-24 m-b-24"}>
-								<Grid item xs={12} className={"wrapper-24 FlexRow SpaceAround"}>
-									{legendButtons}
-								</Grid>
+							<Grid item xs={12} className={"wrapper-24 FlexRow SpaceAround"}>
+								{legendButtons}
 							</Grid>
-							<ResponsiveContainer width="100%" height={500}>
-								<LineChart data={chart} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
-									<XAxis dataKey="time" />
-									<YAxis />
-									<CartesianGrid strokeDasharray="3 3" />
-									<Tooltip />
-									{this.RenderBrush()}
-									{rangesLines}
-								</LineChart>
-							</ResponsiveContainer>
-						</div>
-					</CardContent>
-				</Card>
-			</div>
+						</Grid>
+						<ResponsiveContainer width="100%" height={500}>
+							<LineChart data={chart} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+								<XAxis dataKey="time" />
+								<YAxis />
+								<CartesianGrid strokeDasharray="3 3" />
+								<Tooltip />
+								{this.RenderBrush()}
+								{rangesLines}
+							</LineChart>
+						</ResponsiveContainer>
+					</div>
+				</CardContent>
+			</Card>
 		);
 	}
 }

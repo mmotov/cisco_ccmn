@@ -108,6 +108,15 @@
 	margin-bottom: 24px !important;
 }
 
+.textRow {
+	display: flex;
+	justify-content: space-between;
+}
+
+.rowTitle {
+	font-size: 14px !important;
+}
+
 
 
 

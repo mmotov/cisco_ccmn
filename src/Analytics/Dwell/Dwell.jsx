@@ -71,18 +71,17 @@ class Dwell extends Component {
 	isRange = () => {
 		return this.state.startDate !== this.state.endDate;
 	};
+
 	render() {
 		return (
-			<div>
-				<Grid container direction={"row"} spacing={24} className={"sm-no-spacing"}>
-					<Grid item xs={12} md={8} className={"m-t-sm-24"}>
-						<ChartDwell range={this.isRange()} dwellTime={this.state.dwellTime} />
-					</Grid>
-					<Grid item xs={12} md={4} className={"m-t-sm-24"}>
-						<TotalCount countDwellTime={this.state.countDwellTime} />
-					</Grid>
+			<Grid container direction={"row"} spacing={24} className={"sm-no-spacing"}>
+				<Grid item xs={12} md={8} className={"m-t-sm-24"}>
+					<ChartDwell range={this.isRange()} dwellTime={this.state.dwellTime} />
 				</Grid>
-			</div>
+				<Grid item xs={12} md={4} className={"m-t-sm-24"}>
+					<TotalCount countDwellTime={this.state.countDwellTime} />
+				</Grid>
+			</Grid>
 		);
 	}
 }

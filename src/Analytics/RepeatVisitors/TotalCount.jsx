@@ -2,35 +2,36 @@ import React, { Component } from 'react';
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import {Grid} from "@material-ui/core";
-import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import Typography from "@material-ui/core/Typography";
 import {Cell, Pie, PieChart, ResponsiveContainer, Tooltip} from "recharts";
+import PeopleIcon from '@material-ui/icons/People';
 
+
+let types = ['DAILY', 'WEEKLY', 'OCCASIONAL', 'FIRST_TIME', 'YESTERDAY'];
 
 const keys = {
-	FIVE_TO_THIRTY_MINUTES: {
-		name: '5-30 min',
+
+	DAILY: {
+		name: 'Daily',
 		color: '#4caf50'
 	},
-	THIRTY_TO_SIXTY_MINUTES: {
-		name: '30-60 min',
+	WEEKLY: {
+		name: 'Weekly',
 		color: '#f57f17',
 	},
-	ONE_TO_FIVE_HOURS: {
-		name: '1-5 hrs',
+	OCCASIONAL: {
+		name: 'Occasional',
 		color: '#2196f3',
 	},
-	FIVE_TO_EIGHT_HOURS: {
-		name: '5-8 hrs',
+	FIRST_TIME: {
+		name: 'First Time',
 		color: '#1a237e',
 	},
-	EIGHT_PLUS_HOURS: {
-		name: '8+ hrs',
+	YESTERDAY: {
+		name: 'Yesterday',
 		color: '#b71c1c'
 	}
 };
-
-const ranges = ['FIVE_TO_THIRTY_MINUTES', 'THIRTY_TO_SIXTY_MINUTES', 'ONE_TO_FIVE_HOURS', 'FIVE_TO_EIGHT_HOURS', 'EIGHT_PLUS_HOURS'];
 
 const RADIAN = Math.PI / 180;
 
@@ -51,11 +52,11 @@ class TotalCount extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			FIVE_TO_THIRTY_MINUTES: true,
-			THIRTY_TO_SIXTY_MINUTES: true,
-			ONE_TO_FIVE_HOURS: true,
-			FIVE_TO_EIGHT_HOURS: true,
-			EIGHT_PLUS_HOURS: true
+			DAILY: true,
+			WEEKLY: true,
+			OCCASIONAL: true,
+			FIRST_TIME: true,
+			YESTERDAY: true
 		};
 	}
 
@@ -67,12 +68,12 @@ class TotalCount extends Component {
 
 	buildData() {
 		let data = [];
-		ranges.map((range, index) => {
-			if (this.state[range]) {
+		types.map((type, index) => {
+			if (this.state[type]) {
 				let obj = {
-					name: keys[range].name,
-					value: this.props.countDwellTime[range],
-					key: range
+					name: keys[type].name,
+					value: this.props.count[type],
+					key: type
 				};
 				data.push(obj);
 			}
@@ -82,14 +83,14 @@ class TotalCount extends Component {
 
 	render() {
 		let data = this.buildData();
-		const legendButtons = ranges.map((range, index) =>
+		const legendButtons = types.map((type, index) =>
 			<div
 				key={index}
-				onClick={() => this.hideData(range)}
+				onClick={() => this.hideData(type)}
 				className={"LegendItem"}
-				style={{backgroundColor: keys[range].color, opacity: this.state[range] ? 1 : 0.6}}
+				style={{backgroundColor: keys[type].color, opacity: this.state[type] ? 1 : 0.6}}
 			>
-				{keys[range].name}
+				{keys[type].name}
 			</div>
 		);
 
@@ -97,7 +98,7 @@ class TotalCount extends Component {
 			<Card>
 				<CardContent>
 					<Grid container direction={"row"} className={"wrapper-sm-24 m-b-24"}>
-						<AccessTimeIcon />
+						<PeopleIcon />
 						<Typography style={{margin: '5px 4px'}} color="textSecondary" gutterBottom>Total Count</Typography>
 					</Grid>
 					<Grid container direction={"row"} className={"wrapper-sm-24 m-b-24"}>

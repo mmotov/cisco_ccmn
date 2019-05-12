@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Grid} from "@material-ui/core";
-import {BarChart, Bar, CartesianGrid, XAxis, YAxis, ResponsiveContainer, Tooltip} from 'recharts';
+import {BarChart, Bar, CartesianGrid, XAxis, YAxis, ResponsiveContainer, Tooltip, Brush} from 'recharts';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
@@ -56,6 +56,14 @@ class ChartProximity extends Component {
 		this.setState(obj);
 	};
 
+	RenderBrush = () => {
+		if (this.props.range) {
+			return <Brush dataKey="time" height={30} stroke="#8884d8" />;
+		} else {
+			return false;
+		}
+	};
+
 	render() {
 
 		let chart = [];
@@ -109,6 +117,7 @@ class ChartProximity extends Component {
 								<XAxis dataKey="time" height={60}/>
 								<YAxis />
 								<Tooltip />
+								{this.RenderBrush()}
 								{typesBars}
 							</BarChart>
 						</ResponsiveContainer>

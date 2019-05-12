@@ -116,34 +116,32 @@ class ChartDwell extends Component {
 
 
 		return (
-			<div>
-				<Card>
-					<CardContent>
+			<Card>
+				<CardContent>
+					<Grid container direction={"row"} className={"wrapper-sm-24 m-b-24"}>
+						<AccessTimeIcon />
+						<Typography style={{margin: '5px 4px'}} color="textSecondary" gutterBottom>Dwell Time</Typography>
+					</Grid>
+					<div>
 						<Grid container direction={"row"} className={"wrapper-sm-24 m-b-24"}>
-							<AccessTimeIcon />
-							<Typography style={{margin: '5px 4px'}} color="textSecondary" gutterBottom>Dwell Time</Typography>
-						</Grid>
-						<div>
-							<Grid container direction={"row"} className={"wrapper-sm-24 m-b-24"}>
-								<Grid item xs={12} className={"wrapper-24 FlexRow SpaceAround"}>
-									{legendButtons}
-								</Grid>
+							<Grid item xs={12} className={"wrapper-24 FlexRow SpaceAround"}>
+								{legendButtons}
 							</Grid>
-							<ResponsiveContainer width="100%" height={500}>
-								<AreaChart data={chart} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
-									<defs>{colorsGradients}</defs>
-									<XAxis dataKey="time" />
-									<YAxis />
-									<CartesianGrid strokeDasharray="3 3" />
-									<Tooltip />
-									{this.RenderBrush()}
-									{rangesAreas}
-								</AreaChart>
-							</ResponsiveContainer>
-						</div>
-					</CardContent>
-				</Card>
-			</div>
+						</Grid>
+						<ResponsiveContainer width="100%" height={500}>
+							<AreaChart data={chart} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+								<defs>{colorsGradients}</defs>
+								<XAxis dataKey="time" />
+								<YAxis />
+								<CartesianGrid strokeDasharray="3 3" />
+								<Tooltip />
+								{this.RenderBrush()}
+								{rangesAreas}
+							</AreaChart>
+						</ResponsiveContainer>
+					</div>
+				</CardContent>
+			</Card>
 		);
 	}
 }
