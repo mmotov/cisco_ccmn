@@ -31,6 +31,7 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     justifyContent: "flex-end",
+    height: '100%',
   },
   scroll: {
     overflowY: 'scroll',
@@ -53,68 +54,89 @@ class Search extends React.Component {
 
   validate = (str) => {
     if (str.match(/^([a-fA-F0-9]{2}:){5}([a-fA-F0-9]{2})$/g) ||
-        str.match(/^([a-z]{3,8})$/g)){
+      str.match(/^([a-z]{3,8})$/g)) {
       return true;
     }
     return false;
   }
 
   handleClick = () => {
-    
+
     let tmp = this.state.userInput;
     let verdict = this.validate(tmp)
+    let upper = this;
 
-    if (tmp === "") { return ;}
+    if (tmp === "") { return; }
     // validation if floor is choosen
-    if (!this.props.users){
+    if (!this.props.users) {
       this.setState(prevState => ({
         listOfsearch: [...prevState.listOfsearch, "Pls, choose floor"],
         userInput: ""
       }));
-      return 
+      return
+    }
+    if (!verdict) {
+      this.setState(prevState => ({
+        listOfsearch: [...prevState.listOfsearch, "Wrong input"],
+        userInput: ""
+      }));
+      return;
     }
     // search from array macaddres of username
+    let res = "";
     this.props.users.map(item => {
-      let res = "";
-      if (item.userName === tmp){
-        console.log("find username ", item.mapInfo.mapHierarchyString);
-        res = "Find " + item.userName + " at " + item.mapInfo.mapHierarchyString;
-      } else if (item.macAddress === tmp){
-        console.log("find macaddress", item);
+      // console.log(item.mapInfo.floorRefId)
+      // console.log(item.userName)
+      if (item.userName === tmp) {
+        res = item.userName + " is at " + item.mapInfo.mapHierarchyString.split('>')[2];
+        upper.props.redDot("redDot", item);
+        upper.props.setFloor(item.mapInfo.floorRefId)
+      } else if (item.macAddress === tmp) {
         res = "Find " + item.macAddress + " at " + item.mapInfo.mapHierarchyString;
-      }
-      if (res !== ""){
-        this.setState(prevState => ({
-          listOfsearch: [...prevState.listOfsearch, res],
-          userInput: ""
-        }));
-        return ;
+        upper.props.redDot("redDot", item);
+        upper.props.setFloor(item.mapInfo.floorRefId)
       }
     })
     // handle wrong input
-    this.setState(prevState => ({
-      listOfsearch: [...prevState.listOfsearch, verdict ? prevState.userInput : "Wrond input"],
-      userInput: ""
-    }));
+    if (res === "") {
+      this.setState(prevState => ({
+        listOfsearch: [...prevState.listOfsearch, prevState.userInput + " not found"],
+        userInput: ""
+      }));
+    } else {
+      this.setState(prevState => ({
+        listOfsearch: [...prevState.listOfsearch, res],
+        userInput: ""
+      }));
+    }
+  }
+
+  handleKeyPress = (event) => {
+    if (event.key == 'Enter') {
+      this.handleClick();
+    }
   }
 
   render() {
     const { classes } = this.props;
     return (
       <div className={classes.containerInput}>
-        <CssBaseline />
         <CardContent className={classes.scroll}>
-        { this.state.listOfsearch.map((item, index) => {
-          
-          return (<Typography key={index} component="p">
-            {item}
-          </Typography>);
-        })}
+          {this.state.listOfsearch.map((item, index) => {
+
+            return (<Typography key={index} component="p">
+              {item}
+            </Typography>);
+          })}
         </CardContent>
         <Paper className={classes.root} elevation={1}>
-          <InputBase className={classes.input} placeholder="Search macaddress or login" onChange={this.handleInput} value={this.state.userInput} />
+          <InputBase className={classes.input}
+            placeholder="Search macaddress or login"
+            onChange={this.handleInput}
+            value={this.state.userInput}
+            onKeyPress={this.handleKeyPress} />
           <IconButton className={classes.iconButton} aria-label="Search" onClick={this.handleClick} >
-            <SearchIcon  />
+            <SearchIcon />
           </IconButton>
         </Paper>
       </div>

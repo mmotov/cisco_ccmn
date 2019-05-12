@@ -13,7 +13,8 @@ class Map extends Component {
     this.state = {
       floorList : [],
       campusName : [],
-      buildName : []
+      buildName : [],
+      floorValue: ""
     }
   }
 
@@ -55,6 +56,16 @@ class Map extends Component {
     });
   };
 
+  setFloor = (param) => {
+    this.state.floorList.map(item => {
+      if (this.state[item] === param){
+        this.setState({
+          floor: item,
+        })
+      }
+    })
+  }
+
   render() {
     return (
       <div>
@@ -66,7 +77,7 @@ class Map extends Component {
             >
               <OutlinedTextFields name={this.state.campusName} title="campus" handleChange={this.handleChange}  />
               <OutlinedTextFields name={this.state.buildName} title="bulding" handleChange={this.handleChange} />
-              <OutlinedTextFields name={this.state.floorList} title="floor" handleChange={this.handleChange} />
+              <OutlinedTextFields name={this.state.floorList} title="floor" handleChange={this.handleChange} value={this.state.floor} />
         </Grid>
         <Grid
             container
@@ -77,8 +88,8 @@ class Map extends Component {
             <ImgMediaCard 
               imageSrc={"/" + this.state.campus + "/" + this.state.bulding + "/" + this.state.floor}
               floor={this.state[this.state.floor]}
+              setFloor={this.setFloor}
                />
-
       </Grid>
       </div>
     );

@@ -32,9 +32,15 @@ class OutlinedTextFields extends React.Component {
   }
 
   componentWillReceiveProps(nextProps){
+    if (nextProps.value){
+      this.setState({
+        value: nextProps.value
+      })
+    } else {
       this.setState({
         list: nextProps.name.sort()
       })
+    }
   }
 
   handleChange = () => event => {
@@ -46,7 +52,6 @@ class OutlinedTextFields extends React.Component {
 
   render() {
     const { classes } = this.props;
-
     return (
       <form className={classes.container} noValidate autoComplete="off">
 
@@ -67,7 +72,6 @@ class OutlinedTextFields extends React.Component {
             </MenuItem>
           ))}
         </TextField>
-
       </form>
     );
   }

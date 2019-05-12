@@ -5,7 +5,7 @@ import Home from './Home/Home.jsx';
 import Analytics from './Analytics/Analytics.jsx';
 import Header from './Layout/Header.jsx';
 import Login from './Layout/Login.jsx';
-import Location from './Location/Location.jsx';
+import Map from './Location/Map.jsx';
 
 let Auth = (Component) => {
   if (!localStorage.getItem('cisco_auth')){
@@ -21,7 +21,7 @@ class App extends Component {
             <Route path={"/"} component={Header} />
             <Route exact path={"/"} component={Auth(Home)} />
             <Route path={"/analytics"} component={Auth(Analytics)} />
-            <Route path={"/location"} component={Auth(Location)} />
+            <Route path={"/location"} component={Auth(Map)} />
             <Route path={"/login"} component={Login} />
       </BrowserRouter>
     );

@@ -52,7 +52,8 @@ class UsersLocation extends React.Component {
 
     }
 
-    componentDidMount() {
+    request = () => {
+        console.log("CALL!!!!!")
         let url = config.location + "api/location/v2/clients";
         let header = (JSON.parse(localStorage.getItem('cisco_auth'))).location
         let upper = this
@@ -61,13 +62,19 @@ class UsersLocation extends React.Component {
                 Authorization: header,
             }
         }).then((res) => {
-            upper.props.updateParam(res.data)
+            upper.props.updateParam("allUser", res.data)
+            console.log(res.data)
             this.setState({
                 users: res.data,
             }, this.updateCurent);
         }).catch(error => {
             console.log(error)
         });
+    }
+
+    componentDidMount() {
+        this.request();
+        setInterval(this.request, 3000);
     }
 
     async componentWillMount() {
@@ -104,14 +111,22 @@ class UsersLocation extends React.Component {
             <Layer>
                 <URLImage src={this.props.src} x={0} y={0} width={this.props.width} height={this.props.height} />
                 {this.state.current.map((item, ind) => {
+                    let color = "green";
+                    let founded = 1;
+                    if (this.props.redDot && this.props.redDot.mapCoordinate.x ===item.mapCoordinate.x &&
+                        this.props.redDot.mapCoordinate.y ===item.mapCoordinate.y){
+                            color = "red";
+                            founded = 1.5;
+                        }
+                        
                     return (<Rect
                         titile="lol"
                         key={ind}
                         x={item.mapCoordinate.x * this.state.scaleWidth}
                         y={item.mapCoordinate.y * this.state.scaleHeight}
-                        width={10}
-                        height={10}
-                        fill="green"
+                        width={(this.props.width/140) * founded}
+                        height={(this.props.width/140) * founded}
+                        fill={color}
                     />);
                 })}
             </Layer>

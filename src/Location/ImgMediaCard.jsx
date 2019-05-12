@@ -8,7 +8,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 
 import Grid from '@material-ui/core/Grid';
-import { Stage, Layer, Rect } from 'react-konva';
+import { Stage } from 'react-konva';
 import windowSize from 'react-window-size';
 import UsersLocation from './UsersLocation.jsx';
 import Search from './Search.jsx';
@@ -16,8 +16,10 @@ import Search from './Search.jsx';
 const styles = theme => ({
   card: {
     display: 'flex',
-    maxWidth: '90%',
+    maxWidth: '1400px',
     height: '80vh',
+    width: '90%',
+
   },
   media: {
     // ⚠️ object-fit is not supported by IE 11.
@@ -27,9 +29,10 @@ const styles = theme => ({
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",
-    height: "100%"
+    height: "100%",
+    width: "100%"
   }
-  
+
 
 });
 
@@ -40,8 +43,12 @@ class ImgMediaCard extends React.Component {
     this.state = {
       floor: this.props.floor
     }
+    this.myInput = React.createRef();
   }
 
+  test = () => {
+    console.log(this.myInput.current.offsetWidth);
+  }
 
   async componentWillReceiveProps(nextProps) {
     if (nextProps.floor) {
@@ -67,9 +74,9 @@ class ImgMediaCard extends React.Component {
     }
   }
 
-  setAllUsers = (param) => {
+  setParamState = (name, param) => {
     this.setState({
-      allUser: param
+      [name]: param
     })
   }
 
@@ -85,26 +92,33 @@ class ImgMediaCard extends React.Component {
       </Typography>
       </CardContent>);
     } else {
-      let width = this.props.windowWidth - 200;
-      let height = (this.props.windowWidth - 200) / 2;
+      let width = this.myInput.current.offsetWidth;
+      let height = width / 2;
       image = (
         <Stage width={width} height={height}>
-          <UsersLocation floor={this.state.floor} src={this.state.img} width={width} height={height} updateParam={this.setAllUsers} />
+          <UsersLocation
+            floor={this.state.floor}
+            src={this.state.img}
+            width={width} height={height}
+            updateParam={this.setParamState}
+            redDot={this.state.redDot} />
         </Stage>);
     }
     return (
 
-      <Card className={classes.card}>
+      <Card className={classes.card} >
+
         <Grid
           container
           direction="column"
           justify="space-between"
         >
-          <div className={classes.container}>
-            {image}            
-            <Search users={this.state.allUser} />
+          <div ref={this.myInput} className={classes.container} >
+            {image}
+            <Search users={this.state.allUser} redDot={this.setParamState} setFloor={this.props.setFloor} />
           </div>
         </Grid>
+
       </Card>
 
     );
