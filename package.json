@@ -11,13 +11,19 @@
     "bootstrap-daterangepicker": "^3.0.5",
     "moment": "^2.24.0",
     "rb-datepicker": "0.0.5",
+    "canvas": "^2.4.1",
+    "js-base64": "^2.5.1",
+    "konva": "^3.2.5",
     "react": "^16.8.6",
     "react-advanced-datetimerange-picker": "^0.1.10",
     "react-bootstrap-date-picker": "^5.1.0",
     "react-dom": "^16.8.6",
+    "react-interactive-canvas": "^1.0.2",
+    "react-konva": "^16.8.6",
     "react-router": "^5.0.0",
     "react-router-dom": "^5.0.0",
-    "react-scripts": "2.1.8",
+    "react-scripts": "^3.0.0",
+    "react-window-size": "^1.2.2",
     "recharts": "^1.5.0"
   },
   "scripts": {
@@ -34,6 +40,5 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ],
-  "proxy": "http://localhost:3000"
+  ]
 }

@@ -13,7 +13,8 @@ class Map extends Component {
     this.state = {
       floorList : [],
       campusName : [],
-      buildName : []
+      buildName : [],
+      floorValue: ""
     }
   }
 
@@ -38,22 +39,11 @@ class Map extends Component {
           item.floorList.map( item => {
             upper.setState(prevState => ({
               floorList: [...prevState.floorList, item.name],
-              [item.name]: item.aesUidString,
+              [item.name]: item.aesUidString
             }))
           })
         })
       });
-      // https://cisco-cmx.unit.ua/api/config/v1/maps/image/System%20Campus/UNIT.Factory/1st_Floor
-      // https://cisco-cmx.unit.ua/api/config/v1/maps/image/System%20Campus/UNIT.Factory/1st_Floor
-       url = config.location + 'api/config/v1/maps';
-
-       res = await axios.get(url, {
-               headers: {
-                   Authorization: header,
-               }
-           }
-          );
-        console.log(res)
 
     } catch (error){
       console.log(error)
@@ -66,6 +56,16 @@ class Map extends Component {
     });
   };
 
+  setFloor = (param) => {
+    this.state.floorList.map(item => {
+      if (this.state[item] === param){
+        this.setState({
+          floor: item,
+        })
+      }
+    })
+  }
+
   render() {
     return (
       <div>
@@ -77,7 +77,7 @@ class Map extends Component {
             >
               <OutlinedTextFields name={this.state.campusName} title="campus" handleChange={this.handleChange}  />
               <OutlinedTextFields name={this.state.buildName} title="bulding" handleChange={this.handleChange} />
-              <OutlinedTextFields name={this.state.floorList} title="floor" handleChange={this.handleChange} />
+              <OutlinedTextFields name={this.state.floorList} title="floor" handleChange={this.handleChange} value={this.state.floor} />
         </Grid>
         <Grid
             container
@@ -85,8 +85,11 @@ class Map extends Component {
             justify="center"
             alignItems="flex-start"
             >
-            <ImgMediaCard imageSrc={"/" + this.state.campus + "/" + this.state.bulding + "/" + this.state.floor} floor={this.state[this.state.floor]} />
-
+            <ImgMediaCard 
+              imageSrc={"/" + this.state.campus + "/" + this.state.bulding + "/" + this.state.floor}
+              floor={this.state[this.state.floor]}
+              setFloor={this.setFloor}
+               />
       </Grid>
       </div>
     );

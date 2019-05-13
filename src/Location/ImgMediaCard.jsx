@@ -4,130 +4,129 @@ import axios from 'axios/index';
 import config from '../config.js';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import CustomizedInputBase from './CustomizedInputBase.jsx'
+
 import Grid from '@material-ui/core/Grid';
-import classNames from 'classnames';
+import { Stage } from 'react-konva';
+import windowSize from 'react-window-size';
+import UsersLocation from './UsersLocation.jsx';
+import Search from './Search.jsx';
 
 const styles = theme => ({
-    card: {
-        display: 'flex',
-        maxWidth: '90%',
-        height: '80vh',
-    },
-    media: {
-        // ⚠️ object-fit is not supported by IE 11.
-        objectFit: 'cover',
-    },
+  card: {
+    display: 'flex',
+    maxWidth: '1400px',
+    height: '80vh',
+    width: '90%',
+
+  },
+  media: {
+    // ⚠️ object-fit is not supported by IE 11.
+    objectFit: 'cover',
+  },
+  container: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    height: "100%",
+    width: "100%"
+  }
+
+
 });
 
-class ImgMediaCard extends React.Component{
+class ImgMediaCard extends React.Component {
 
-    constructor(props){
-        super(props)
-        this.state = {
-            floor: this.props.floor
-        }
+  constructor(props) {
+    super(props)
+    this.state = {
+      floor: this.props.floor
     }
+    this.myInput = React.createRef();
+  }
 
-    async componentWillReceiveProps(nextProps){
+  test = () => {
+    console.log(this.myInput.current.offsetWidth);
+  }
+
+  async componentWillReceiveProps(nextProps) {
+    if (nextProps.floor) {
+      // Try rebuid by async request
+      try {
+        let url = config.location + "api/config/v1/maps/image" + nextProps.imageSrc;
+        let header = (JSON.parse(localStorage.getItem('cisco_auth'))).location
+        let res = await axios.get(url, {
+          headers: {
+            Authorization: header,
+          },
+          responseType: 'arraybuffer'
+        });
+        let tmp = "data:image/png;base64," + new Buffer(res.data).toString('base64');
         this.setState({
-            floor: nextProps.floor
-        })
-        if (nextProps.floor){
-            try {
-                let url = config.location + 'api/location/v2/clients';
-                let header = (JSON.parse(localStorage.getItem('cisco_auth'))).location
-                let res = await axios.get(url, {
-                    headers: {
-                        Authorization: header
-                    }
-                });
-                console.log(res.data)
-                // res.data.map(item => {
-                //   console.log(item.mapInfo.floorRefId, item.mapCoordinate.x, item.mapCoordinate.y)
-                // })
-            } catch (error){
-                console.log(error)
-            }
-        }
-    }
+          img: tmp,
+          floor: nextProps.floor
+        });
 
-    image = () => {
-        if (!this.props.floor){
-            return (<CardContent>
-                <Typography gutterBottom variant="h5" component="h2">
-                    Please select floor, building and cumpus
-                </Typography>
-            </CardContent>);
-        }
-        // // try {
-        // //     let res = await axios.get("/floorImage", {
-        // //         params: {
-        // //             url: this.props.imageSrc,
-        // //         }
-        // //     });
-        // // } catch (error){
-        // //     console.log(error)
-        // // }
-        // return (<CardMedia
-        //     component="img"
-        //     alt="Contemplative Reptile"
-        //     className={this.props.media}
-        //     height="auto"
-        //     image={res.data}
-        //     title="Contemplative Reptile"
-        // />);
+      } catch (error) {
+        console.log(error)
+      }
     }
+  }
+
+  setParamState = (name, param) => {
+    this.setState({
+      [name]: param
+    })
+  }
 
     render() {
 
-        const { classes } = this.props;
+    const { classes } = this.props;
+    let image;
 
-        return (
-
-            <Card lol="lol" className={classes.card}>
-                <Grid
-                    container
-                    direction="column"
-                    justify="space-between"
-
-                >
-                    <CardActionArea>
-                        {this.image()}
-                        <img src='https://RO:just4reading@cisco-cmx.unit.ua/api/config/v1/maps/image/System%20Campus/UNIT.Factory/2nd_Floor' />
-                        <CssBaseline />
-                        <CardContent>
-                            <Typography component="p">
-                                Hi, @xlogin or mac: 00:00:2a:01:00:06 now is on the first floor.
-                            </Typography>
-                            <Typography component="p">
-                                Hi, @xlogin or mac: 00:00:2a:01:00:06 now is on the first floor.
-                            </Typography>
-                            <Typography component="p">
-                                Hi, @xlogin or mac: 00:00:2a:01:00:06 now is on the first floor.
-                            </Typography>
-                            <Typography component="p">
-                                Hi, @xlogin or mac: 00:00:2a:01:00:06 now is on the first floor.
-                            </Typography>
-                        </CardContent>
-                    </CardActionArea>
-                    <CustomizedInputBase />
-                </Grid>
-            </Card>
-
-        );
+    if (!this.state.img) {
+      image = (<CardContent>
+        <Typography gutterBottom variant="h5" component="h2">
+          Please select floor, building and cumpus
+      </Typography>
+      </CardContent>);
+    } else {
+      let width = this.myInput.current.offsetWidth;
+      let height = width / 2;
+      image = (
+        <Stage width={width} height={height}>
+          <UsersLocation
+            floor={this.state.floor}
+            src={this.state.img}
+            width={width} height={height}
+            updateParam={this.setParamState}
+            redDot={this.state.redDot} />
+        </Stage>);
     }
+    return (
+
+      <Card className={classes.card} >
+
+        <Grid
+          container
+          direction="column"
+          justify="space-between"
+        >
+          <div ref={this.myInput} className={classes.container} >
+            {image}
+            <Search users={this.state.allUser} redDot={this.setParamState} setFloor={this.props.setFloor} />
+          </div>
+        </Grid>
+
+      </Card>
+
+    );
+  }
 }
 
 ImgMediaCard.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(ImgMediaCard);
+export default withStyles(styles)(windowSize(ImgMediaCard));

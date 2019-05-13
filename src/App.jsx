@@ -4,7 +4,7 @@ import './App.css';
 import Analytics from './Analytics/Analytics.jsx';
 import Header from './Layout/Header.jsx';
 import Login from './Layout/Login.jsx';
-import Location from './Location/Location.jsx';
+import Map from './Location/Map.jsx';
 
 let Auth = (Component) => {
     if (!localStorage.getItem('cisco_auth')){
