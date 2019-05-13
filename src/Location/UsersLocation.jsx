@@ -12,6 +12,7 @@ class UsersLocation extends React.Component {
             current: [],
             imgWidth: "",
             imgHeight: "",
+            macAddr: []
         }
         this.scaleWidth = this.scaleWidth.bind(this);
         this.scaleHeight = this.scaleHeight.bind(this);
@@ -53,15 +54,13 @@ class UsersLocation extends React.Component {
     }
 
     diplayNotification = (data) => {
-        let arrA = data;
-        let arrB = this.state.users
+        let arrA = Array.from(data, item => item.macAddress);
+        let arrB = this.state.macAddr
         let difference = arrA.filter(x => !arrB.includes(x));
         console.log(difference);
-        if (data.length < 10){
-            this.props.notification("less")
-        } else {
-            this.props.notification("big")
-        }
+        if (difference.length < 10 && difference.length != 0){
+            this.props.notification("new " + difference.join(" "))
+        } 
     }
 
     request = () => {
@@ -79,6 +78,7 @@ class UsersLocation extends React.Component {
             this.diplayNotification(res.data)
             this.setState({
                 users: res.data,
+                macAddr: Array.from(res.data, item => item.macAddress)
             }, this.updateCurent);
         }).catch(error => {
             console.log(error)

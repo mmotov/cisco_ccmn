@@ -121,15 +121,6 @@ class Map extends Component {
             onClick={this.handleClose}
             message={<span id="message-id">{ msg }</span>}
           />
-          <Snackbar
-            anchorOrigin={{vertical, horizontal}}
-            open={open}
-            onClose={this.handleClose}
-
-            autoHideDuration={3000}
-            onClick={this.handleClose}
-            message={<span id="message-id">popopopo</span>}
-          />
         </Grid>
       </div>
     );
