@@ -71,6 +71,10 @@
 	.wrapper-sm-24 {
 		margin: 0 24px !important;
 	}
+
+	.m-t-sm-24 {
+		margin-top: 24px !important;
+	}
 }
 
 @media screen and (min-width: 600px) {
@@ -85,6 +89,13 @@
 	}
 }
 
+@media screen and (max-width: 600px) {
+	.sm-no-spacing {
+		width: 100% !important;
+		margin: 0 !important;
+	}
+}
+
 .wrapper-24 {
 	margin: 0 24px !important;
 }
@@ -95,6 +106,15 @@
 
 .m-b-24 {
 	margin-bottom: 24px !important;
+}
+
+.textRow {
+	display: flex;
+	justify-content: space-between;
+}
+
+.rowTitle {
+	font-size: 14px !important;
 }
 
 
