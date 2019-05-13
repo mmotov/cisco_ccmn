@@ -52,8 +52,20 @@ class UsersLocation extends React.Component {
 
     }
 
+    diplayNotification = (data) => {
+        let arrA = data;
+        let arrB = this.state.users
+        let difference = arrA.filter(x => !arrB.includes(x));
+        console.log(difference);
+        if (data.length < 10){
+            this.props.notification("less")
+        } else {
+            this.props.notification("big")
+        }
+    }
+
     request = () => {
-        console.log("CALL!!!!!")
+        
         let url = config.location + "api/location/v2/clients";
         let header = (JSON.parse(localStorage.getItem('cisco_auth'))).location
         let upper = this
@@ -63,7 +75,8 @@ class UsersLocation extends React.Component {
             }
         }).then((res) => {
             upper.props.updateParam("allUser", res.data)
-            console.log(res.data)
+            // console.log(res.data)
+            this.diplayNotification(res.data)
             this.setState({
                 users: res.data,
             }, this.updateCurent);
@@ -74,7 +87,7 @@ class UsersLocation extends React.Component {
 
     componentDidMount() {
         this.request();
-        setInterval(this.request, 3000);
+        setInterval(this.request, 10000);
     }
 
     async componentWillMount() {

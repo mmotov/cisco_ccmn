@@ -101,7 +101,8 @@ class ImgMediaCard extends React.Component {
             src={this.state.img}
             width={width} height={height}
             updateParam={this.setParamState}
-            redDot={this.state.redDot} />
+            redDot={this.state.redDot}
+            notification={this.props.notification} />
         </Stage>);
     }
     return (
@@ -115,7 +116,7 @@ class ImgMediaCard extends React.Component {
         >
           <div ref={this.myInput} className={classes.container} >
             {image}
-            <Search users={this.state.allUser} redDot={this.setParamState} setFloor={this.props.setFloor} />
+            <Search  users={this.state.allUser} redDot={this.setParamState} setFloor={this.props.setFloor} />
           </div>
         </Grid>
 
