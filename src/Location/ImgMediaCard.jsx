@@ -41,13 +41,10 @@ class ImgMediaCard extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      floor: this.props.floor
+      floor: this.props.floor,
+      info: []
     }
     this.myInput = React.createRef();
-  }
-
-  test = () => {
-    console.log(this.myInput.current.offsetWidth);
   }
 
   async componentWillReceiveProps(nextProps) {
@@ -80,6 +77,18 @@ class ImgMediaCard extends React.Component {
     })
   }
 
+  showInfo = (x, y) => e =>{
+    let upper = this;
+    this.state.allUser.map((item) => {
+        if (item.mapCoordinate.x === x 
+          && item.mapCoordinate.y === y
+          && this.state.floor === item.mapInfo.floorRefId){
+            console.log(item.manufacturer, item.userName, item.macAddress)
+            upper.setState({ info:[item.manufacturer, item.userName, item.macAddress] })
+        }
+    })
+}
+
     render() {
 
     const { classes } = this.props;
@@ -102,13 +111,12 @@ class ImgMediaCard extends React.Component {
             width={width} height={height}
             updateParam={this.setParamState}
             redDot={this.state.redDot}
-            notification={this.props.notification} />
+            notification={this.props.notification}
+            showInfo={this.showInfo} />
         </Stage>);
     }
     return (
-
       <Card className={classes.card} >
-
         <Grid
           container
           direction="column"
@@ -116,7 +124,11 @@ class ImgMediaCard extends React.Component {
         >
           <div ref={this.myInput} className={classes.container} >
             {image}
-            <Search  users={this.state.allUser} redDot={this.setParamState} setFloor={this.props.setFloor} />
+            <Search  
+            users={this.state.allUser} 
+            redDot={this.setParamState} 
+            setFloor={this.props.setFloor}
+            info={this.state.info} />
           </div>
         </Grid>
 

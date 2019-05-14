@@ -91,7 +91,7 @@ class Search extends React.Component {
         upper.props.redDot("redDot", item);
         upper.props.setFloor(item.mapInfo.floorRefId)
       } else if (item.macAddress === tmp) {
-        res = "Find " + item.macAddress + " at " + item.mapInfo.mapHierarchyString;
+        res = "Find " + item.macAddress + " at " + item.mapInfo.mapHierarchyString.split('>')[2];
         upper.props.redDot("redDot", item);
         upper.props.setFloor(item.mapInfo.floorRefId)
       }
@@ -108,6 +108,21 @@ class Search extends React.Component {
         userInput: ""
       }));
     }
+  }
+
+  componentWillReceiveProps(nextProps){
+    if (nextProps.info !== this.props.info){
+      this.addInfo(nextProps.info);
+    }
+  }
+
+  addInfo = (param) => {
+    let upper = this;
+    param.map(item => {
+      upper.setState(prevState => ({
+        listOfsearch: [...prevState.listOfsearch, item]
+      }))
+    })
   }
 
   handleKeyPress = (event) => {

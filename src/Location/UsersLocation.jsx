@@ -119,6 +119,14 @@ class UsersLocation extends React.Component {
         });
     }
 
+    // showInfo = (x, y) => e =>{
+    //     this.state.current.map((item) => {
+    //         if (item.mapCoordinate.x == x && item.mapCoordinate.y == y){
+    //             console.log(item.manufacturer, item.userName, item.macAddress)
+    //         }
+    //     })
+    // }
+
     render() {
         return (
             <Layer>
@@ -127,7 +135,7 @@ class UsersLocation extends React.Component {
                     let color = "green";
                     let founded = 1;
                     if (this.props.redDot && this.props.redDot.mapCoordinate.x ===item.mapCoordinate.x &&
-                        this.props.redDot.mapCoordinate.y ===item.mapCoordinate.y){
+                        this.props.redDot.mapCoordinate.y === item.mapCoordinate.y){
                             color = "red";
                             founded = 1.5;
                         }
@@ -140,6 +148,7 @@ class UsersLocation extends React.Component {
                         width={(this.props.width/140) * founded}
                         height={(this.props.width/140) * founded}
                         fill={color}
+                        onClick={this.props.showInfo(item.mapCoordinate.x, item.mapCoordinate.y)}
                     />);
                 })}
             </Layer>

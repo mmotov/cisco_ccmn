@@ -79,7 +79,7 @@ class Map extends Component {
 
   handleClose = () => {
     this.setState({ open: false });
-  };
+  }
 
   render() {
     const { vertical, horizontal, open, msg } = this.state;
@@ -118,7 +118,6 @@ class Map extends Component {
               'aria-describedby': 'message-id',
             }}
             autoHideDuration={3000}
-            onClick={this.handleClose}
             message={<span id="message-id">{ msg }</span>}
           />
         </Grid>
