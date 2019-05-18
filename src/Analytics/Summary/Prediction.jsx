@@ -108,8 +108,6 @@ class Prediction extends Component {
 
 
 	render() {
-
-
 		let predictions = {};
 		types.map((type, index) => {
 			predictions[type] = this.predict(type);

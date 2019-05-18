@@ -9,40 +9,61 @@ class Visitors extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			ready: this.props.data.ready,
+			visitors: this.props.data.visitors,
+			connected: this.props.data.connected,
+			passerby: this.props.data.passerby,
+			percentage: this.props.data.percentage,
+			conversionRateL: this.props.data.conversionRateL
 
 		};
 	}
 
+	componentWillReceiveProps(nextProps, nextContext) {
+		this.setState(nextProps);
+	}
+
+	renderContent() {
+		if (this.state.ready) {
+			return (
+				<div>
+					<div className={"textRow"}>
+						<Typography className={"rowTitle"} gutterBottom variant="caption">Total Visitors:</Typography>
+						<Typography gutterBottom variant="body1">{this.state.visitors}</Typography>
+					</div>
+					<div className={"textRow"}>
+						<Typography className={"rowTitle"} gutterBottom variant="caption">Total Connected:</Typography>
+						<Typography>{this.state.connected}</Typography>
+					</div>
+					<div className={"textRow"}>
+						<Typography className={"rowTitle"} gutterBottom variant="caption">Total Passerby:</Typography>
+						<Typography>{this.state.passerby}</Typography>
+					</div>
+					<div className={"textRow"}>
+						<Typography className={"rowTitle"} gutterBottom variant="caption">Connected Percentage:</Typography>
+						<Typography>{this.state.percentage} %</Typography>
+					</div>
+					<div className={"textRow"}>
+						<Typography className={"rowTitle"} gutterBottom variant="caption">Conversion Rate:</Typography>
+						<Typography>{this.state.conversionRate} %</Typography>
+					</div>
+				</div>
+			);
+		}
+	}
+
 	render() {
+
 		return (
 			<Grid item xs={12} sm={6} md={3} className={"m-t-sm-24"}>
-				<Card style={{height: "100%"}}>
+				<Card style={{height: "100%"}} className={"relative"}>
 					<CardContent>
 						<div className={"textRow"}>
 							<Typography gutterBottom variant="headline">Visitors</Typography>
 							<PeopleOutlineIcon style={{fontSize: 32}}/>
 						</div>
 						<hr/>
-						<div className={"textRow"}>
-							<Typography className={"rowTitle"} gutterBottom variant="caption">Total Visitors:</Typography>
-							<Typography gutterBottom variant="body1">{this.props.visitors}</Typography>
-						</div>
-						<div className={"textRow"}>
-							<Typography className={"rowTitle"} gutterBottom variant="caption">Total Connected:</Typography>
-							<Typography>{this.props.connected}</Typography>
-						</div>
-						<div className={"textRow"}>
-							<Typography className={"rowTitle"} gutterBottom variant="caption">Total Passerby:</Typography>
-							<Typography>{this.props.passerby}</Typography>
-						</div>
-						<div className={"textRow"}>
-							<Typography className={"rowTitle"} gutterBottom variant="caption">Connected Percentage:</Typography>
-							<Typography>{this.props.precentage} %</Typography>
-						</div>
-						<div className={"textRow"}>
-							<Typography className={"rowTitle"} gutterBottom variant="caption">Conversion Rate:</Typography>
-							<Typography>{this.props.conversionRate} %</Typography>
-						</div>
+						{this.renderContent()}
 					</CardContent>
 				</Card>
 			</Grid>
