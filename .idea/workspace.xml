@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f276d6fb-3055-403b-9e0b-22abed1d9039" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Analytics/Analytics.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Analytics/Analytics.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Analytics/Summary/Devices.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Analytics/Summary/Devices.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Analytics/Summary/DwellTime.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Analytics/Summary/DwellTime.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Analytics/Summary/Prediction.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Analytics/Summary/Prediction.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Analytics/Summary/Summary.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Analytics/Summary/Summary.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Analytics/Summary/Visitors.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Analytics/Summary/Visitors.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
-    </list>
+    <list default="true" id="f276d6fb-3055-403b-9e0b-22abed1d9039" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -226,12 +216,12 @@
       <workItem from="1557415160614" duration="8454000" />
       <workItem from="1557643257984" duration="17479000" />
       <workItem from="1557935519576" duration="110000" />
-      <workItem from="1558155029215" duration="10960000" />
+      <workItem from="1558155029215" duration="11308000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="125248000" />
+    <option name="totallyTimeSpent" value="125596000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="2560" height="1440" extended-state="0" />
