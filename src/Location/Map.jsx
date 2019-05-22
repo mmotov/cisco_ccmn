@@ -107,9 +107,6 @@ class Map extends Component {
             setFloor={this.setFloor}
             notification={this.handleClick}
           />
-          <Button onClick={() => this.handleClick("lol")}>
-          Top-Left
-        </Button>
           <Snackbar
             anchorOrigin={{ vertical, horizontal }}
             open={open}
