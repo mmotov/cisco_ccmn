@@ -57,7 +57,6 @@ class UsersLocation extends React.Component {
         let arrA = Array.from(data, item => item.macAddress);
         let arrB = this.state.macAddr
         let difference = arrA.filter(x => !arrB.includes(x));
-        console.log(difference);
         if (difference.length < 10 && difference.length != 0){
             this.props.notification("new " + difference.join(" "))
         } 
@@ -74,7 +73,6 @@ class UsersLocation extends React.Component {
             }
         }).then((res) => {
             upper.props.updateParam("allUser", res.data)
-            // console.log(res.data)
             this.diplayNotification(res.data)
             this.setState({
                 users: res.data,
@@ -82,6 +80,11 @@ class UsersLocation extends React.Component {
             }, this.updateCurent);
         }).catch(error => {
             console.log(error)
+            axios.post('/error', {
+                data: error.message 
+              }).catch(function (error) {
+                console.log(error);
+              });
         });
     }
 
@@ -118,14 +121,6 @@ class UsersLocation extends React.Component {
             };
         });
     }
-
-    // showInfo = (x, y) => e =>{
-    //     this.state.current.map((item) => {
-    //         if (item.mapCoordinate.x == x && item.mapCoordinate.y == y){
-    //             console.log(item.manufacturer, item.userName, item.macAddress)
-    //         }
-    //     })
-    // }
 
     render() {
         return (

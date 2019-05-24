@@ -38,9 +38,9 @@ module.exports = function (webserver, controller) {
     });
 
     webserver.post('/error', function (req, res) {
-        var log = req.query.data;
+        var log = req.body.data;
         var currTime = new Date().toUTCString()
-
+        console.log(req.body.data)
         if (!log) {
             return res.status(400).send("no data")
         }

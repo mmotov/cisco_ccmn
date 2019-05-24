@@ -21,7 +21,8 @@ class Login extends Component {
       presenceUname: "",
       presencePass: "",
       locationUname: "",
-      locationPass: ""
+      locationPass: "",
+      error: false,
     };
   }
 
@@ -37,31 +38,40 @@ class Login extends Component {
     }
   }
 
-  async componentWillUnmount() {
-    try{
-      let url = config.presence + 'api/config/v1/sites';
-      let header = (JSON.parse(localStorage.getItem('cisco_auth'))).presence
-      let res = await axios.get(config.presence + 'api/config/v1/sites', {
-              headers: {
-                  Authorization: header
-              }
-          });
-      localStorage.setItem('siteId', JSON.stringify({
-        id: res.data[0].aesUId,
-      }));
-    } catch (error){
-      if (error.response.status == 401){
-        localStorage.removeItem('cisco_auth');
-        this.props.history.push("/login");
-      }
-    }
-  }
-
- handleSubmit() {
+ async handleSubmit() {
+   if (this.state.presencePass === "" || this.state.presenceUname === "" 
+        || this.state.locationPass === "" || this.state.locationUname === ""){
+     return ;
+   }
+  try{
+    let header = "Base " + btoa(this.state.presenceUname + ":" + this.state.presencePass)
+    let res = await axios.get(config.presence + 'api/config/v1/sites', {
+            headers: {
+                Authorization: header
+            }
+        });
+    localStorage.setItem('siteId', JSON.stringify({
+      id: res.data[0].aesUId,
+    }));
     localStorage.setItem('cisco_auth', JSON.stringify({
       presence: "Base " + btoa(this.state.presenceUname + ":" + this.state.presencePass),
       location: "Base " + btoa(this.state.locationUname + ":" + this.state.locationPass),
     }));
+    
+    window.location.reload();
+  } catch (error){
+    if (error.response.status == 401){
+      localStorage.removeItem('cisco_auth');
+      this.props.history.push("/login");
+      this.setState({ error: true })
+    }
+    axios.post('/error', {
+      data: error.message 
+    }).catch(function (error) {
+      console.log(error);
+    });
+  }
+    
   }
 
   render() {
@@ -82,11 +92,11 @@ class Login extends Component {
                   <FormLabel component="legend">Cisco_CMX_Locate</FormLabel>
                 <FormControl margin="normal" required fullWidth>
                   <InputLabel htmlFor="text">Username</InputLabel>
-                  <Input required={true} name="locationUname" autoComplete="text" autoFocus onChange={this.handleChange.bind(this)} />
+                  <Input error={this.state.error} required={true} name="locationUname" autoComplete="text" autoFocus onChange={this.handleChange.bind(this)} />
                 </FormControl>
                 <FormControl margin="normal" required fullWidth>
                   <InputLabel htmlFor="password">Password</InputLabel>
-                  <Input required={true} name="locationPass" type="password"  autoComplete="current-password" onChange={this.handleChange.bind(this)} />
+                  <Input error={this.state.error} required={true} name="locationPass" type="password"  autoComplete="current-password" onChange={this.handleChange.bind(this)} />
                 </FormControl>
 
             </div>
@@ -95,11 +105,11 @@ class Login extends Component {
 
               <FormControl margin="normal" required fullWidth>
                 <InputLabel htmlFor="text">Username</InputLabel>
-                <Input required={true} name="presenceUname" autoComplete="text" autoFocus onChange={this.handleChange.bind(this)} />
+                <Input error={this.state.error} required={true} name="presenceUname" autoComplete="text" autoFocus onChange={this.handleChange.bind(this)} />
               </FormControl>
               <FormControl margin="normal" required fullWidth>
                 <InputLabel htmlFor="password">Password</InputLabel>
-                <Input required={true} name="presencePass" type="password" autoComplete="current-password" onChange={this.handleChange.bind(this)} />
+                <Input error={this.state.error} required={true} name="presencePass" type="password" autoComplete="current-password" onChange={this.handleChange.bind(this)} />
               </FormControl>
               </div>
               <Button
@@ -107,7 +117,8 @@ class Login extends Component {
                 variant="contained"
                 color="primary"
                 className="Submit"
-                type="submit"
+                onClick={this.handleSubmit.bind(this)}
+                
                 >
                 Submit
               </Button>

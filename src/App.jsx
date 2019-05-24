@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Redirect, BrowserRouter} from 'react-router-dom';
+import { Route, Redirect, BrowserRouter } from 'react-router-dom';
 import './App.css';
 import Analytics from './Analytics/Analytics.jsx';
 import Header from './Layout/Header.jsx';
@@ -7,13 +7,17 @@ import Login from './Layout/Login.jsx';
 import Map from './Location/Map.jsx';
 
 let Auth = (Component) => {
-    if (!localStorage.getItem('cisco_auth')){
-        return () => ( <Redirect to='/login' /> );
+    if (!localStorage.getItem('cisco_auth')) {
+        return () => (<Redirect to='/login' />);
     }
-    return () => ( <Component /> );
+    return () => (<Component />);
 };
 
+
 class App extends Component {
+    
+    
+
     render() {
         return (
             <BrowserRouter>

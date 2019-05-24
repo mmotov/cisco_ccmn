@@ -48,7 +48,7 @@ class ImgMediaCard extends React.Component {
   }
 
   async componentWillReceiveProps(nextProps) {
-    if (nextProps.floor) {
+    if (nextProps.floor && nextProps.campus && nextProps.build) {
       // Try rebuid by async request
       try {
         let url = config.location + "api/config/v1/maps/image" + nextProps.imageSrc;
@@ -67,6 +67,11 @@ class ImgMediaCard extends React.Component {
 
       } catch (error) {
         console.log(error)
+        axios.post('/error', {
+          data: error.message 
+        }).catch(function (error) {
+          console.log(error);
+        });
       }
     }
   }
@@ -83,7 +88,6 @@ class ImgMediaCard extends React.Component {
         if (item.mapCoordinate.x === x 
           && item.mapCoordinate.y === y
           && this.state.floor === item.mapInfo.floorRefId){
-            console.log(item.manufacturer, item.userName, item.macAddress)
             upper.setState({ info:[item.manufacturer, item.userName, item.macAddress] })
         }
     })

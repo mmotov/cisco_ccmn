@@ -54,7 +54,13 @@ class Map extends Component {
 
     } catch (error) {
       console.log(error)
+      axios.post('/error', {
+        data: error.message 
+      }).catch(function (error) {
+        console.log(error);
+      });
     }
+
   }
 
   handleChange = (name, value) => {
@@ -104,6 +110,8 @@ class Map extends Component {
           <ImgMediaCard
             imageSrc={"/" + this.state.campus + "/" + this.state.bulding + "/" + this.state.floor}
             floor={this.state[this.state.floor]}
+            campus={this.state.campus}
+            build={this.state.bulding}
             setFloor={this.setFloor}
             notification={this.handleClick}
           />

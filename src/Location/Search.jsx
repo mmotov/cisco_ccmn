@@ -84,8 +84,7 @@ class Search extends React.Component {
     // search from array macaddres of username
     let res = "";
     this.props.users.map(item => {
-      // console.log(item.mapInfo.floorRefId)
-      // console.log(item.userName)
+
       if (item.userName === tmp) {
         res = item.userName + " is at " + item.mapInfo.mapHierarchyString.split('>')[2];
         upper.props.redDot("redDot", item);
