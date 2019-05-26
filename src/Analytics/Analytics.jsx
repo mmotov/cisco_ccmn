@@ -7,6 +7,7 @@ import Proximity from "./Proximity/Proximity";
 import Dwell from "./Dwell/Dwell";
 import RepeatVisitors from "./RepeatVisitors/RepeatVisitors";
 import Summary from "./Summary/Summary";
+import Insights from "./Insights/Insights";
 
 class Analytics extends Component {
 	constructor(props) {
@@ -25,7 +26,6 @@ class Analytics extends Component {
 	};
 
 	render() {
-		// {/*<RepeatVisitors startDate={this.state.startDate} endDate={this.state.endDate} />*/}
 		return (
 			<div className={"wrapper-md-24"}>
 				<Grid container direction={"column"}>
@@ -33,6 +33,7 @@ class Analytics extends Component {
 						<Header handleParams={this.getQueryParams}/>
 					</Grid>
 					<Summary startDate={this.state.startDate} endDate={this.state.endDate} />
+					<Insights       startDate={this.state.startDate} endDate={this.state.endDate} />
 					<Proximity      startDate={this.state.startDate} endDate={this.state.endDate} />
 					<Dwell          startDate={this.state.startDate} endDate={this.state.endDate} />
 					<RepeatVisitors startDate={this.state.startDate} endDate={this.state.endDate} />

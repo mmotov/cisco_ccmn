@@ -23,7 +23,7 @@ class App extends Component {
             <BrowserRouter>
                 <Route path={"/"} component={Header} />
                 <Route exact path={"/"} component={Auth(Analytics)} />
-                <Route path={"/location"} component={Auth(Map)} />
+                <Route exact path={"/location"} component={Auth(Map)} />
                 <Route path={"/login"} component={Login} />
             </BrowserRouter>
         );

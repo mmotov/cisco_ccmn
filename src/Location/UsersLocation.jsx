@@ -12,7 +12,8 @@ class UsersLocation extends React.Component {
             current: [],
             imgWidth: "",
             imgHeight: "",
-            macAddr: []
+            macAddr: [],
+            interval: undefined
         }
         this.scaleWidth = this.scaleWidth.bind(this);
         this.scaleHeight = this.scaleHeight.bind(this);
@@ -90,7 +91,12 @@ class UsersLocation extends React.Component {
 
     componentDidMount() {
         this.request();
-        setInterval(this.request, 10000);
+        this.setState({interval: setInterval(this.request, 10000)});
+    }
+
+    componentWillUnmount() {
+
+        clearInterval(this.state.interval);
     }
 
     async componentWillMount() {

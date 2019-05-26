@@ -51,7 +51,11 @@ class Proximity extends Component {
 				this.setState({connected: result.data});
 			})
 			.catch((error) => {
-				console.log(error);
+				axios.post('/error', {
+					data: error.message
+				}).catch(function (error) {
+					console.log(error);
+				});
 			});
 	};
 
@@ -64,7 +68,11 @@ class Proximity extends Component {
 				this.setState({passerby: result.data});
 			})
 			.catch((error) => {
-				console.log(error);
+				axios.post('/error', {
+					data: error.message
+				}).catch(function (error) {
+					console.log(error);
+				});
 			});
 	};
 
@@ -77,7 +85,11 @@ class Proximity extends Component {
 				this.setState({visitors: result.data});
 			})
 			.catch((error) => {
-				console.log(error);
+				axios.post('/error', {
+					data: error.message
+				}).catch(function (error) {
+					console.log(error);
+				});
 			});
 	};
 
@@ -90,7 +102,11 @@ class Proximity extends Component {
 				this.setState({visitorsCount: result.data});
 			})
 			.catch((error) => {
-				console.log(error);
+				axios.post('/error', {
+					data: error.message
+				}).catch(function (error) {
+					console.log(error);
+				});
 			});
 	}
 
@@ -103,7 +119,11 @@ class Proximity extends Component {
 				this.setState({connectedCount: result.data});
 			})
 			.catch((error) => {
-				console.log(error);
+				axios.post('/error', {
+					data: error.message
+				}).catch(function (error) {
+					console.log(error);
+				});
 			});
 	}
 
@@ -116,7 +136,11 @@ class Proximity extends Component {
 				this.setState({passerbyCount: result.data});
 			})
 			.catch((error) => {
-				console.log(error);
+				axios.post('/error', {
+					data: error.message
+				}).catch(function (error) {
+					console.log(error);
+				});
 			});
 	}
 
