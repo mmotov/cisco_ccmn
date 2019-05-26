@@ -52,7 +52,11 @@ class RepeatVisitors extends Component {
 				this.setState({repeatVisitors: result.data});
 			})
 			.catch((error) => {
-				console.log(error);
+				axios.post('/error', {
+					data: error.message
+				}).catch(function (error) {
+					console.log(error);
+				});
 			});
 	}
 
@@ -64,7 +68,11 @@ class RepeatVisitors extends Component {
 				this.setState({count: result.data});
 			})
 			.catch((error) => {
-				console.log(error);
+				axios.post('/error', {
+					data: error.message
+				}).catch(function (error) {
+					console.log(error);
+				});
 			});
 	}
 

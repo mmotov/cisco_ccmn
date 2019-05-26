@@ -41,11 +41,14 @@ class Summary extends Component {
 		request.data.params = {...request.data.params, ...this.buildQueryDateParams()};
 		axios.get(request.baseUrl + 'api/presence/v1/kpisummary', request.data)
 			.then((result) => {
-				console.log('result.data', result.data);
 				this.setState({summary: result.data});
 			})
 			.catch((error) => {
-				console.log(error);
+				axios.post('/error', {
+					data: error.message
+				}).catch(function (error) {
+					console.log(error);
+				});
 			});
 	};
 

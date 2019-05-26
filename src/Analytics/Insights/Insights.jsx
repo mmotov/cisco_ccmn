@@ -41,11 +41,14 @@ class Insights extends Component {
 		request.data.params = {...request.data.params, ...this.buildQueryDateParams()};
 		axios.get(request.baseUrl + 'api/presence/v1/insights', request.data)
 			.then((result) => {
-				console.log('result.data', result.data);
 				this.setState({insights: result.data});
 			})
 			.catch((error) => {
-				console.log(error);
+				axios.post('/error', {
+					data: error.message
+				}).catch(function (error) {
+					console.log(error);
+				});
 			});
 	};
 

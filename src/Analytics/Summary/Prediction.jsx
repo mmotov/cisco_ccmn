@@ -43,7 +43,11 @@ class Prediction extends Component {
 				this.setState({connected: result.data});
 			})
 			.catch((error) => {
-				console.log(error);
+				axios.post('/error', {
+					data: error.message
+				}).catch(function (error) {
+					console.log(error);
+				});
 			});
 	};
 
@@ -58,7 +62,11 @@ class Prediction extends Component {
 				this.setState({passerby: result.data});
 			})
 			.catch((error) => {
-				console.log(error);
+				axios.post('/error', {
+					data: error.message
+				}).catch(function (error) {
+					console.log(error);
+				});
 			});
 	};
 
@@ -73,7 +81,11 @@ class Prediction extends Component {
 				this.setState({visitors: result.data});
 			})
 			.catch((error) => {
-				console.log(error);
+				axios.post('/error', {
+					data: error.message
+				}).catch(function (error) {
+					console.log(error);
+				});
 			});
 	};
 
@@ -91,8 +103,6 @@ class Prediction extends Component {
 				currentKeyDate = moment(currentKeyDate).add(-7, "days").format("Y-MM-DD");
 				i++;
 			}
-			console.log("counts: ", counts);
-			console.log("i: ", i);
 			return parseInt(this.countAverage(counts, i));
 		}
 		return 0

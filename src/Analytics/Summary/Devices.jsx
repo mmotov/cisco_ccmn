@@ -17,7 +17,6 @@ class Devices extends Component {
 		if (this.props.ready) {
 			const propsDevices = this.props.data.devices;
 			let sortedDevices = Object.keys(propsDevices).sort(function(a, b){return propsDevices[b] - propsDevices[a]});
-			console.log('sortedDevices: ', sortedDevices);
 			let deviceNames = [];
 			for (let prop in sortedDevices) {
 				if (sortedDevices.hasOwnProperty(prop)) {

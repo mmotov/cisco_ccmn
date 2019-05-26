@@ -51,7 +51,11 @@ class Dwell extends Component {
 				this.setState({dwellTime: result.data});
 			})
 			.catch((error) => {
-				console.log(error);
+				axios.post('/error', {
+					data: error.message
+				}).catch(function (error) {
+					console.log(error);
+				});
 			});
 	}
 
@@ -60,11 +64,14 @@ class Dwell extends Component {
 		request.data.params = {...request.data.params, ...this.buildQueryDateParams()};
 		axios.get(request.baseUrl + 'api/presence/v1/dwell/count', request.data)
 			.then((result) => {
-				console.log('RESPONSE: ', result.data);
 				this.setState({countDwellTime: result.data});
 			})
 			.catch((error) => {
-				console.log(error);
+				axios.post('/error', {
+					data: error.message
+				}).catch(function (error) {
+					console.log(error);
+				});
 			});
 	}
 
