@@ -68,7 +68,7 @@ controller.hears(["(^([a-fA-F0-9]{2}:){5}([a-fA-F0-9]{2})$)", "(^([a-z]{3,8})$)"
               
         }
         if (!find){
-            bot.reply(message, "not find");
+            bot.reply(message, "No such user");
         }
             }
             });

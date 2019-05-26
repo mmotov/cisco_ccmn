@@ -44,7 +44,7 @@ module.exports = function (webserver, controller) {
         if (!log) {
             return res.status(400).send("no data")
         }
-        var stream = fs.createWriteStream('./log/Log.log', { flags: 'a' });
+        var stream = fs.createWriteStream(__dirname + '/log/Log.log', { flags: 'a' });
         stream.once('open', function (fd) {
             stream.write("[" + currTime + "] " + log + "\n");
             stream.end();

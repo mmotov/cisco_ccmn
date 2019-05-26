@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Redirect, BrowserRouter } from 'react-router-dom';
+import { Route, Redirect, HashRouter } from 'react-router-dom';
 import './App.css';
 import Analytics from './Analytics/Analytics.jsx';
 import Header from './Layout/Header.jsx';
@@ -20,12 +20,12 @@ class App extends Component {
 
     render() {
         return (
-            <BrowserRouter>
+            <HashRouter>
                 <Route path={"/"} component={Header} />
                 <Route exact path={"/"} component={Auth(Analytics)} />
                 <Route exact path={"/location"} component={Auth(Map)} />
                 <Route path={"/login"} component={Login} />
-            </BrowserRouter>
+            </HashRouter>
         );
     }
 }

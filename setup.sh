@@ -1,3 +1,5 @@
+npm install
+npm install ./bot/
 npm run-script build
 mkdir ./bot/public/
 cp -R build/* ./bot/public/

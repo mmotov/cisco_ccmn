@@ -1,6 +1,6 @@
 import config from '../config.js'
 
-const siteId = 1513804707441;
+// const siteId = 1513804707441;
 
 function getHeader(){
 	return (JSON.parse(localStorage.getItem('cisco_auth'))).presence;
@@ -12,7 +12,7 @@ export function getPresenceParams() {
 		data: {
 			headers: { Authorization: getHeader()},
 			params: {
-				siteId: siteId
+				siteId: (JSON.parse(localStorage.getItem('siteId'))).id
 			}
 		}
 	};
